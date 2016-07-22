@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-itunes-app" content="app-id=991635537,app-argument=xiaodao360://activity/detail/id/{{ data.id }}/type/0">
+    <meta itemprop="image" content="{{ data.thumb }}"/>
+    <title>{{ data.title }}</title>
+    <link rel="stylesheet" href="/Public/css/mobile/common.css">
+    <link rel="stylesheet" href="/Public/css/mobile/animate.css">
+    <link rel="stylesheet" href="/Public/mobile/css/XDWM.css">
+    <style>
+
+    /*公共样式*/
+    .act_detail{overflow:hidden;}
+    .active_desc article table{width: 100%!important;}
+    span.tn-Powered-by-XIUMI {width:auto!important;}
+    fieldset p{width:80%;overflow:hidden;}
+    fieldset span p{width:100%;overflow:hidden;}
+    .border_bottom2 {
+      padding-left: .625rem;
+      clear: both;
+      padding:0.5rem 0;
+    }
+    .auto_resize article img{height: auto!important;}
+    .active_detail_page .page_ctn{
+        display: block;
+    }
+
+    </style>
+</head>
+<body pageWidth="360" class="active_detail_page {% if data.is_status === '已结束' %} active_over {% endif %}" style="overflow-x:hidden">
+<div class="page_ctn" act_type="0" act_id="{{ data.id }}">
+	<header>
+	    <h1>{{ data.subtitle }}</h1>
+        {% if data.type == 0 %}
+	    <p style="line-height: 1rem;margin-top:0.5rem;">时间：</p>
+	    <p style="line-height: 1rem;color:#c4c4c4">
+            {% if data.cycle == 1 %}
+            {{ data.startTime.day }} 至 {{ data.endTime.day }} 每周 {{ data.cycle_list }}
+            {{ data.startTime.time }} 至{{ data.endTime.time }}
+                {{ data.startTime.day }} 至 {{ data.endTime.day }} 每周 {{ data.cycle_list }}
+                {{ data.startTime.time }} 至 {{ data.endTime.time }}
+	        {% elseif data.startTime.day == data.endTime.day %}
+                {{ data.startTime.day }} {{ data.startTime.time }} 至 {{ data.endTime.time }}
+	        {% else %}
+                {{ data.startTime.day }} {{ data.startTime.time }} 至 {{ data.endTime.day }} {{ data.endTime.time }}
+	        {% endif %}
+	    </p>
+	    {% endif %}
+	    <p style="line-height: 1rem;margin-top:0.5rem;">地址：</p>
+	    <p style="line-height: 1rem;color:#c4c4c4">
+			<span style="color:#c4c4c4">{{ data.scope }}</span>
+			{{ data.school.name }} {{ data.address }}
+	     </p>
+	    <div class="img"><img src="{{ data.thumb }}"/></div>
+	</header>
+	<section class="active_info clearfix">
+        {% if data.enroll == 1 %}
+	        <dl class="border_top"><dt>报名审核：</dt><dd>{% if data.is_examine == 1 %}需要审核{% else %}无需审核{% endif %}</dd></dl>
+	        <dl class="border_top"><dt>报名截止：</dt><dd><b>{{ data.closeTime.day }} {{ data.closeTime.time }}</b></dd></dl>
+            <!-- addTime:2014.4.26 屏蔽 报名人数 -->
+	        <!-- <dl class="border_top"><dt>报名人数：</dt><dd><if condition="($data_arr[limits] eq 0) OR ($data_arr[limits] eq '')">不限<else/><{$data_arr['limits']}>人</if></dd></dl> -->
+	    {% endif %}
+	    <dl class="border_top"><dt>活动价格：</dt><dd><b>
+
+        {% if data.pay == 0 %}免费{% else %} {{ data.price }} {% endif %}</b></dd></dl>
+
+        {% if data.pay == 1 %}
+            <dl class="border_top buyTikWay"><dt>购票方式：</dt><dd>
+            {% if data.paytype == 0 %}线下购票{% else %}<a href="{{ data.payurl }}" targrt="_blank">{{ data.payurl }}</a>{% endif %}
+            </dd></dl>
+        {% endif %}
+	</section>
+
+    {% if data.reward == '' %}
+	<section class="active_desc active_prize">
+	    <h2 class="border_bottom">活动奖励</h2>
+	    <article>
+            {{ data.reward }}
+	    </article>
+	</section>
+	{% endif %}
+    
+    {% if data.relation_info && data.relation_info.status %}
+	<section class="relative">
+		<h2 class="border_bottom">相关活动</h2>
+		<p>{{ data.relation_info.title }}</p>
+		<a href="{{ ctx.request.url }}/a/{{ data.relation_info.id }}">去看看</a>
+	</section>
+	{% endif %}
+
+	<section class="organize">
+	    <h3 class="border_bottom">发布者</h3>
+	    <dl class="member next_step" org_id="{{ data.organize_id }}"><dt><img data-organize="{{ data.organize_id }}" src="{{ data.organize.logo }}"/></dt><dd>{{ data.organize.name }}</dd></dl>
+	</section>
+
+    {% if data.campus_activity > 0 %}
+	<section class="campus_active" school_id="{{ data.campus_activity }}">
+		<dl class="next_step">
+			<dt></dt>
+			<dd><h3>其它校内活动</h3>点击查看该校所有校内活动</dd>
+		</dl>
+	</section>
+	{% endif %}
+	<section class="active_desc">
+	    <h2 class=" border_bottom">活动详情</h2>
+	    <article>
+            {{ data.content }}
+	    </article>
+	</section>
+	<section class="action border_top bottom" {% if data.enroll == 0 %}style="display:none;"{% endif %} >
+            {% if data.is_close == 1 %}
+	           <button type="button">报名已结束</button>
+            {% elseif data.is_status == '已结束' %}
+	            <button type="button">活动已结束</button>
+            {% elseif ctx.session.mid > 0 %}
+                {% if data.is_apply == 2 %}
+	                <button type="button">审核中</button>
+                {% elseif data.is_apply == 1 %}
+	                <button type="button">报名成功</button>
+	            {% else %}
+	                <button link="{{ data.enroll_url }}" class="go_enroll" type="button">{% if data.is_apply == '-2' %}重新{% else %}我要{% endif %}报名</button>
+                {% endif %}
+	        {% else %}
+	            <button type="button" class="fn_enroll">{% if data.is_apply == '-2' %}重新{% else %}我要{% endif %}报名</button>
+	        {% endif %}
+	</section>
+</div>
+    <div class="login_box_l animated">
+        <h3 style="font-size: 1rem;font-weight:bold;">登 录<i class="del_btn" style="float: right;  line-height: 0;width:2rem;height:2rem;position:relative;background-size: contain;display: inline-block;right: 0px;top: 0px;position: absolute;"><img src="/public/img/mobile/close3.png" style=""></i></h3>
+
+
+        <div class="login_box_x animated" style="display:block;margin-bottom:0.6rem">
+            <div class="login_input">
+                <input type="tel" name="username" style="margin-bottom:1rem;border-radius: 50px;background:#f1f1f1;font-size: 0.8rem;" placeholder="请输入手机号" error_tip="用户名">
+                <input type="password" name="password"  style="border-radius: 50px;background:#f1f1f1;font-size: 0.8rem;" placeholder="请输入密码" error_tip="密码">
+                <div class="enroll_btn apply_btn login_input" style="margin-top:1rem;">
+                    <a href="javascript:;" class="fn_enroll" onclick="login_btn()" style="font-size: 0.9rem;height:2rem;line-height:2rem;">立即登录</a>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center;font-size: 0.8rem;color:#7c7c7c;border-bottom:0.05rem solid #dcdcdc;padding-bottom:10px;width:60%;margin:auto;margin-top:2rem;">其他方式直接登录</p>
+        <div class="login_way" style="padding-top:2%;">
+            {% if data.is_weixin == 1 %}
+                <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid={{wxJsConfig['appid']}}&redirect_uri={{redirect_url}}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect" onclick="cache_url();" >
+                    <img src="/public/img/mobile/logw.png">
+                </a>
+            {% endif %}
+
+            {% if data.is_mobile && data.id == '1195' %}
+                <a href="javascript:;" onclick="show_say();">
+                    <img src="/public/img/mobile/logq.png">
+                </a>
+            {% else %}
+                <a href="__ROOT__/api/qq/login.php" onclick="cache_url();">
+                    <img src="/public/img/mobile/logq.png">
+                </a>
+            {% endif %}
+            <!-- <a href="javascript:;" id="xd_login">
+                <img src="/public/img/mobile/logx.png">
+                <span>校导网</span>
+            </a> -->
+        </div>
+    </div>
+    <div class="window_bg"></div>
+<!-- </div> -->
+<div class="weixin_tips animated">
+    <span>请在微信环境下，进行微信登录</span>
+</div>
+
+<div class="sure_pop" style="background:#999">
+    <h3>活动已经结束了！</h3>
+    <div class="abd_opt">
+        <a href="javascript:;" >确定</a>
+    </div>
+</div>
+<div class="window_bg2"></div>
+
+<script src="/Public/mobile/js/zepto.js"></script>
+<script src="/Public/mobile/js/touch.js"></script>
+<script src="/Public/mobile/js/md5.js"></script>
+<script src="/Public/mobile/js/XMLib.js"></script>
+
+{% if data.is_weixin %}
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="/Public/mobile/js/common/share.js"></script>
+{% endif %}
+
+<script>
+    var visible_group = "{{ data.visible_group }}";
+    var is_org_member = "{{ data.is_org_member }}";
+    var isWX='{{ data.is_weixin }}';
+    var id = '{{ detail.id }}';
+    var appEnroll = parseInt({{ data.app_enroll }}, 10),timeEnd = "{{ data_arr['is_status'] }}",activeEnd = {{ data.is_close|| 0 }};
+    var activity_type = parseInt({{ data.type }}, 10); //0线下报名活动，1线上报名活动，2投票
+
+    if (appEnroll==1){
+        if(timeEnd != '已结束'|| activeEnd != 1){
+            $('.action button').html('打开APP报名');
+            //$('section.top_download').hide();
+            //$('body.top_event_3').css({'padding-top':'0'});
+            $('.topP').hide();
+            $('.action button').on('click',function(e){
+                XMUtl.dlApp(e);
+            });
+        }
+    }else{
+        if(timeEnd != '已结束'|| activeEnd != 1){
+            $('.action button').html('点击报名');
+            $('.topP').hide();
+            $('.action button').on('click',function(e){
+                $('.is_hide').hide();
+                $('.window_bg').show();
+                $('.login_box_l').show();
+            });
+        }
+    }
+
+    $('.campus_active').click(function(){
+        var distId=$(this).attr('school_id');
+        location.href='/mobile/index/campus_activity?school_id='+distId+'&is_app='+XMUtl.request('is_app');
+    });
+    $('.organize dl').click(function(){
+        var orgId=$(this).attr('org_id');
+        if (typeof orgId!='undefined'&&orgId!=''){
+            location.href='/mobile/index/organize?id='+orgId+'&is_app='+XMUtl.request('is_app');
+        }
+    });
+    function show_say(){
+        alert('该活动只支持手机端访问报名');
+    }
+
+    //将活动详情的页面自适应
+    $(function(){
+        $(".act_detail_cont img").each(function () {
+            var width = $(this).attr('width');
+            if (width > 640) {
+                $(".act_detail_cont img").attr('style','');
+                $(".act_detail_cont img").attr('width','90%');
+                $(".act_detail_cont img").attr('height','90%');
+            }
+        })
+    })
+
+    if(history.length == 1){
+        $('.back_btn').removeClass('back_btn').addClass('home_btn');
+        $('.home_btn').css({'left':0})
+        $('.home_btn img').attr('src',"/public/img/mobile/home.png");
+        $('.home_btn').attr('href',"");
+    }
+
+    $('.sure_pop a').click(function(){
+        $('.sure_pop').hide();
+        $('.window_bg2').hide();
+    })
+    $('.window_bg2').bind('touchmove',function(ev){
+        ev.preventDefault();
+    })
+
+    $('.go_enroll').click(function(e){
+        if (appEnroll==1){
+            XMUtl.dlApp(e);
+        }else{
+            if(visible_group == '1' && is_org_member == '0'){
+                alert('此活动仅允许社团内成员参与，赶快加入吧');
+                return false;
+            }
+            location.href=$(this).attr('link');
+        }
+    });
+    $('#xd_login').bind('click',function(){
+        $('.login_box_x').removeClass('fadeOutDown2').addClass('fadeInUp2').show()
+    });
+    $('.login_box_x .cancel').bind('click',function(){
+        $('.login_box_x').removeClass('fadeInUp2').addClass('fadeOutDown2')
+    });
+
+    $('.window_bg,.del_btn').bind('click',function(){
+        $('.window_bg').hide();
+        $('.login_box_l').hide();
+        $('.is_hide').show();
+    })
+
+    //缓存链接 登录后直接跳转链接
+    function cache_url(){
+        "<{:cookie('get_url', $enroll_url)}>";
+    }
+
+    var bReady=false;
+    function check(){
+        var aLi=$('.login_input>input');
+        var arr=[];
+        aLi.each(function(){
+            arr.push($(this).attr('name'))
+        })
+        for(var i=0; i<arr.length; i++){
+            var str=$.trim($('.login_input').find('input[name='+arr[i]+']').val())
+            if(str==''){
+                $('.sure_pop h3').html($('.login_input').find('input[name='+arr[i]+']').attr('error_tip')+'不能为空')
+                $('.sure_pop').show();
+                $('.window_bg2').show();
+                return;
+            }else{
+                if(arr[i]=='username'){
+                    var reg=/^[\w\.]+@[a-zA-Z0-9\-]+(\.[a-zA-Z]{2,6}){1,2}$/;
+                    var reg2=/^(1\d{10})$/;
+                    var users=$('.login_input').find('input[name='+arr[i]+']').val();
+
+                    if((reg.test(users)==false) && (reg2.test(users)==false)){
+                        $('.sure_pop h3').html('用户名错误');
+                        $('.sure_pop').show();
+                        $('.window_bg2').show();
+                        return;
+                    }
+                }
+            }
+        }
+        bReady=true;
+    }
+    //账号密码执行登录操作
+    function login_btn(){
+        var username = $("input[name='username']").val();
+        var password = md5($("input[name='password']").val());
+        var activity_id = "{{ data.id }}";
+        check();
+        if(bReady){
+            $.post('__ROOT__/mobile/index/login',{'username':username,'password':password},function(json){
+                if(json.status == 1){
+                    $.get('__ROOT__/mobile/ajax/is_apply/id/'+activity_id,function(json){
+                        if(json.status == 1){
+                            //addtime:2.16.5.4 去除已经报名提示弹框
+                            // $('.sure_pop h3').html('你已经报名！');
+                            // $('.sure_pop').show();
+                            // $('.window_bg2').show();
+                            // $('.sure_pop a').click(function(){
+                                window.setTimeout("window.location='__ROOT__/a/{{ data.id }}'",0);
+                            //})
+                        }else{
+                            window.setTimeout("window.location='{{ enroll_url }}'",0);
+                        }
+                    },'json')
+                }else{
+                    $('.sure_pop h3').html('账号或密码错误');
+                    $('.sure_pop').show();
+                    $('.window_bg2').show();
+                }
+            },'json')
+            bReady=false
+        }
+    }
+
+    $('#w_login').click(function(){
+        $('.weixin_tips').removeClass('fadeOut').addClass('fadeIn').show();
+        setTimeout(function(){
+            $('.weixin_tips').removeClass('fadeIn').addClass('fadeOut');
+        },1000)
+
+    });
+
+    $('.login_input input').focus(function(){
+        $('.login_box_l').css({position:'fixed'});
+    });
+
+    $('.login_box_l').bind('touchmove',function(ev){
+        ev.preventDefault();
+    });
+
+    $('.window_bg').bind('touchmove',function(ev){
+        ev.preventDefault();
+    });
+
+    $('.download a').click(function(e){
+        XMUtl.dlApp(e);
+        return false;
+    });
+    /* 新增app分享内容 */
+    var shareCfg = {
+            title:$('header h1').text(),
+            thumb:$('header img').attr('src'),
+            targetUrl:location.href,
+            content:"{{data.summary}}"
+    };
+    XDWM.NAPI.share(shareCfg);
+
+
+    //baidu statistics
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?a0c2d815893821a3b69bfa4e694c6a32";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+    $(function(){
+        $(".tn-Powered-by-XIUMI span").addClass("addspan")
+        var userAgent=navigator.userAgent;
+        if (/Android/.test( userAgent )){
+            $('body').addClass('auto_resize');
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+
+.ui-login-form{
+	position: relative;
+    top: -70px;
+	width: 620px;
+	height: 285px;
+	margin: 0 auto;
+	padding: 30px;
+	background-color: #fff;
+	color: #999;
+	.login-form{
+		h3{
+			margin-bottom: 20px;
+		}
+		&.error-form h3{
+			margin-bottom: 60px; 
+		}
+		position: relative;
+		width: 270px;
+		float: left;
+		margin-left: 40px;
+		.input-group{
+			width: 260px;
+		}
+		input{
+			width: 100%;
+			height: 38px;
+			margin-bottom: 10px;
+			line-height: 38px;
+			vertical-align: middle;
+			padding: 0 5px;
+			border: 1px solid #999;
+			border-radius: 3px;
+			font-size: 14px;
+			outline: none;
+		}
+		.field-tips{
+			position: absolute;
+			display: none;
+			width: 100%;
+			height: 30px;
+			line-height: 30px;
+		    left: 0;
+		    top: 55px;
+		    border: 1px solid red;
+			font-size: 12px;
+			color: #999;
+			background-color: #fcf2f2;
+			.i-alert{
+				width: 20px;
+				height: 20px;
+				display: inline-block;
+			    float: left;
+			    margin-top: 8px;
+			    margin-left: 8px;
+				background: url(./img/alert.png?__inline) top left no-repeat;
+			}
+		}
+
+		.input-username .field-tips{
+			z-index: 9;
+		}
+
+		.btn{
+			width: 100%;
+			height: 40%;
+			margin-top: 10px;
+			padding: 10px 0;
+			text-align: center;
+			border-radius: 5px;
+			color: #fff;
+			background-color: #31c37c;
+			&:hover{
+				background-color: #289560;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.login-code{
+		float: right;
+		width: 260px;
+		margin: 25px 0 auto 0;
+		font-size: 16px;
+		h3{
+			margin: 10px auto;
+			text-align: center;
+		}
+		p{
+			padding: 20px 0 20px 65px;
+			border-left: 1px solid #ccc;
+		}
+	}
+}
+
+.copy-right{
+	position: relative;
+    top: -70px;
+	margin: 20px auto;
+	line-height: 20px;
+	text-align: center;
+	font-size: 12px;
+	color: #999;
+}

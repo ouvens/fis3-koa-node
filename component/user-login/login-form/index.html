@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="./index.scss">
+
+
+<div class="ui-login-form" id="loginForm" data-session-mid="{{ session.mid }}">
+    <form class="login-form" action="javascript: void(0)">
+        <h3>使用账号登录</h3>
+        <div class="input-group input-username">
+            <input type="text" data-pattern="not_null|mobile" data-msg="请输入注册校导使用的手机号|请输入有效手机号" name="username" id="username" value="" placeholder="请输入手机号">
+            <div class="tips field-tips"></div>
+        </div>
+        <div class="input-group input-password">
+            <input type="password" data-pattern="not_null" data-min="1" data-msg="请输入密码" name="password" id="password" value="" placeholder="请输入密码">
+            <div class="tips field-tips"></div>
+        </div>
+        <div class="btn btn-submit">登录</div>
+    </form>
+
+    <div class="login-code">
+        <h3>使用校导APP扫码登陆</h3>
+        <p>
+            <img src="./img/login-qrcode.png" alt="登陆二维码">
+        </p>
+    </div>
+</div>
+<p class="copy-right">
+    Copyright 2016-2018 xiaoDao All Right Reserved 鄂ICP证B2-20120059号 校园<br>
+    校导科技有限公司版权所有，未经书面授权禁止使用
+</p>

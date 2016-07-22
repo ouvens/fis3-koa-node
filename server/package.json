@@ -1,0 +1,41 @@
+{
+  "name": "koa-build-tool",
+  "version": "0.9.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Elzair/koa-mongodb-example"
+  },
+  "description": "A solution",
+  "main": "test.js",
+  "scripts": {
+    "test": "nodemon --harmony test.js",
+    "start": "node --harmony test.js"
+  },
+  "keywords": [
+    "koa",
+    "test"
+  ],
+  "author": "ouvenzhang",
+  "license": "ISC",
+  "dependencies": {
+    "co-monk": "~1.0.0",
+    "co-request": "^1.0.0",
+    "co-views": "~0.2.0",
+    "jssha": "^2.1.0",
+    "koa": "^1.2.0",
+    "koa-body": "^1.4.0",
+    "koa-logger": "~1.2.0",
+    "koa-request": "^1.0.0",
+    "koa-router": "^5.4.0",
+    "koa-session-redis3": "^1.3.3",
+    "koa-static": "~1.4.3",
+    "koa-stylus": "0.0.3",
+    "lodash": "^4.13.1",
+    "log4js": "^0.6.37",
+    "monk": "~0.8.1",
+    "nodemon": "^1.9.1",
+    "pm2": "^1.1.3",
+    "swig": "~1.3.2"
+  },
+  "devDependencies": {}
+}

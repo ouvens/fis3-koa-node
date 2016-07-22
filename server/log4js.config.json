@@ -1,0 +1,16 @@
+{
+  "appenders": [{
+    "type": "file",
+    "filename": "log/log.log",
+    "maxLogSize": 20480,
+    "backups": 3,
+    "category": "relative-logger"
+  }, {
+    "type": "file",
+    "absolute": true,
+    "filename": "/data/wwwroot/node_server/logFile.log",
+    "maxLogSize": 20480,
+    "backups": 10,
+    "category": "absolute-logger"
+  }]
+}

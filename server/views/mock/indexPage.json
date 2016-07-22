@@ -1,0 +1,194 @@
+{
+    "retcode": 0,
+    "result": {
+        "keywords": ["电影", "饮食", "旅游", "数码", "新闻", "科技"],
+        "pageMenu": [{
+            "title":"分类1",
+            "icon": "cate1",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        },{
+            "title":"分类2",
+            "icon": "cate2",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        },{
+            "title":"分类3",
+            "icon": "cate3",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        },{
+            "title":"分类4",
+            "icon": "cate4",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        },{
+            "title":"分类5",
+            "icon": "cate5",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        },{
+            "title":"分类6",
+            "icon": "cate6",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        },{
+            "title":"分类4",
+            "icon": "cate4",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        },{
+            "title":"分类5",
+            "icon": "cate5",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        },{
+            "title":"分类6",
+            "icon": "cate6",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        },{
+            "title":"分类10",
+            "icon": "cate",
+            "url": "http://placeholder.qiniudn.com/100x100"
+        }],
+        "banner2": [{
+                "title":"节日特惠",
+                "desc": "最低价",
+                "image": "http://placeholder.qiniudn.com/100x100",
+                "url": "http://placeholder.qiniudn.com/100x100"
+            },{
+                "title":"特价活动",
+                "desc": "特价活动最低价",
+                "image": "http://placeholder.qiniudn.com/100x100",
+                "url": "http://placeholder.qiniudn.com/100x100"
+            },{
+                "title":"特价活动",
+                "desc": "特价活动最低价",
+                "image": "http://placeholder.qiniudn.com/100x100",
+                "url": "http://placeholder.qiniudn.com/100x100"
+            },{
+                "title":"特价活动",
+                "desc": "特价活动最低价",
+                "image": "http://placeholder.qiniudn.com/100x100",
+                "url": "http://placeholder.qiniudn.com/100x100"
+            }
+        ],
+        "banner3": {
+            "total": 124,
+            "title": "猜你喜欢",
+            "url": "http://placeholder.qiniudn.com/100x100",
+            "list": [{
+                    "title":"节日特惠",
+                    "desc": "最低价",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100"
+                },{
+                    "title":"特价活动",
+                    "desc": "特价活动最低价",
+                    "image": "http://9.url.cn/edu/banner/img/2b318237_yb_760_300.jpg",
+                    "url": "http://placeholder.qiniudn.com/100x100"
+                },{
+                    "title":"特价活动2",
+                    "desc": "特价活动最低价2",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100"
+                }
+            ]
+        },
+        "panel3": {
+            "total": 124,
+            "title": "猜你喜欢",
+            "url": "http://placeholder.qiniudn.com/100x100",
+            "list": [{
+                    "title":"节日特惠",
+                    "desc": "最低价",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100"
+                },{
+                    "title":"特价活动",
+                    "desc": "特价活动最低价",
+                    "image": "http://9.url.cn/edu/banner/img/2b318237_yb_760_300.jpg",
+                    "url": "http://placeholder.qiniudn.com/100x100"
+                },{
+                    "title":"特价活动2",
+                    "desc": "特价活动最低价2",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100"
+                }
+            ]
+        },
+        "slider": [{
+                "title":"节日特惠",
+                "image": "http://9.url.cn/edu/banner/img/2b318237_yb_760_300.jpg",
+                "url": "http://placeholder.qiniudn.com/100x100"
+            },{
+                "title":"特价活动",
+                "image": "http://9.url.cn/edu/banner/img/77339087_yb_760_300.jpg",
+                "url": "http://placeholder.qiniudn.com/100x100"
+            },{
+                "title":"特价活动3",
+                "image": "http://9.url.cn/edu/banner/img/aeed3ed4_yb_760_300.jpg",
+                "url": "http://placeholder.qiniudn.com/100x100"
+            }
+        ],
+        "tabs": {
+            "recmendList":{
+                "total": 25,
+                "list": [{
+                    "title": "哈哈表表表",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    },{
+                    "title": "哈哈表表34",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    },{
+                    "title": "哈哈表表表",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    },{
+                    "title": "哈哈表表34",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    },{
+                    "title": "哈哈表表34",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    }
+                ] 
+            },
+            "moreList":{
+                "total": 25,
+                "list": [{
+                    "title": "哈哈表表表",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    },{
+                    "title": "哈哈表表表",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    },{
+                    "title": "哈哈表表34",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    },{
+                    "title": "哈哈表表表",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    },{
+                    "title": "哈哈表表34",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    },{
+                    "title": "哈哈表表表",
+                    "image": "http://placeholder.qiniudn.com/100x100",
+                    "url": "http://placeholder.qiniudn.com/100x100",
+                    "desc": "死定了涉及到法律水电费"
+                    }
+                ] 
+            }
+        }
+    }
+}

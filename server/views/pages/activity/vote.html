@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+	<title>{{ data.title }}</title>
+	<meta name="apple-itunes-app" content="app-id=991635537,app-argument=xiaodao360://activity/detail/id/{{ data.id }}/type/2">
+	<meta name="screen-orientation" content="portrait">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="description" content="{{ data.desc }}" />
+	<meta itemprop="image" content="{{ data.thumb }}"/>
+	<link rel="stylesheet" href="/Public/mobile/css/XDWM.css">
+	<style>
+	.topic_page .page_ctn{
+        display: block;
+    }
+    </style>
+</style>
+</head>
+<body pageWidth="360" class="vote_page">
+	<div class="page_ctn" act_type="2" act_id="{{ data.id }}">
+		<div class="active_detail">
+			<header>
+				<h1>{{ data.title }}</h1>
+				<p class="close">
+				{% if !data.is_close %}
+				投票截止时间：<span><?= date('Y-m-d H:i', $detail['close'])?></span>
+				{% else %}
+				活动已结束
+				{% endif %}
+				</p>
+				<p class="range">参与范围：<span>{{ data.scope }}</span></p>
+				<div class="img"><img src="{{ data.thumb404 }}" /></div>
+			</header>
+			
+			{% if data.reward %}
+			<section class="prize act_cont" v-if="reward!=null&&reward!=''">
+				<h3 class="border_bottom">活动奖励</h3>
+				<article class="content">{{ data.reward }}</article>
+			</section>
+			{% endif %}
+			
+			<section class="summary  act_cont">
+				<h3 class="border_bottom">活动详情</h3>
+				<article class="content">{{ data.summary }}</article>
+				<p class="right"><a href="javascript:void(0);" class="show_cont">查看图文详情 &gt;</a></p>
+			</section>
+			{% if data.relation_info && data.relation_info.status >= 0 %}
+			<section class="relative  act_cont">
+				<h3 class="border_bottom">相关活动</h3>
+				<p>{{ data.relation_info.title }}</p>
+				<a href="{{ ctx.request.url }}/a/{{ data.relation_info.id }}">去看看</a>
+			</section>
+			{% endif %}
+			<section class="organize  act_cont">
+		    	<h2 class=" border_bottom">发布者</h2>
+	    		<dl class="member next_step" org_id="{{ data.organize_id }}"><dt><img data-organize="{{ data.organize_id }}" src="{{ data.organize.logo }}"/></dt><dd>{{ data.organize.name }}</dd></dl>
+			</section>
+    		{% if data.campus_activity > 0 %}
+			<section class="campus_active" school_id="{{ data.campus_activity }}">
+				<dl class="next_step">
+					<dt></dt>
+					<dd><h3>其它校内活动</h3>点击查看该校所有校内活动</dd>
+				</dl>
+			</section>
+			{% endif %}
+			<section class="act_cont  vote_rule">
+				<h3 class="border_bottom">投票作品</h3>
+				<p class="filter"><a class="default c" val="0" href="javascript:void(0);">默认</a>|<a class="hot" val="1" href="javascript:void(0);">热度</a></p>
+				<dl class="rule"><dt><b>一共可投{{ data.count_vote }}票</b>，给每个参赛者<b>最多投{{ data.user_vote }}票</b></dt></dl>
+			</section>
+		</div>
+
+		<ul class="list vote_list">
+			<li v-for="item in data" v-bind:class="{ 'img': item.type=='1', 'text': item.type!='1' }" v_id="<% item.id %>">
+				<div class="img" v-if="item.type==1">
+					<img v-bind:src="item.url">
+				</div>
+				<h3 class="" v-if="item.describe!=null&&item.describe!=''"><% item.describe %></h3>
+				<div class="vote border_top" v_id="<% item.id %>">
+					<div class="info">NO:<% item.sort %><b><% item.vote_count %>票</b></div>
+					<div class="act"><span>已投<% item.my_vote_count %>票</span><button class="" type="button">投票</button></div>
+				</div>
+			</li>
+		</ul>
+		<section class="border_top hide ended">
+			<dl class="center">作品已经全部加载完了</dl>
+		</section>
+		<div class="anchor"></div>
+	</div>
+	<section class="act_cont act_detail hide">
+		<h3 class="border_bottom"><button type="button"></button>活动详情</h3>
+		<div class="content"><?=$detail['content']?></div>
+	</section>
+	<section class="works_detail">
+		<h3 class="border_bottom"><button type="button">全部作品</button>NO:<% data.sort %></h3>
+		<div class="img">
+			<img v-bind:src="data.url">
+		</div>
+		<article class="border_top"><% data.describe %></article>
+		<div class="vote border_top" v_id="<% data.id %>">
+			<div class="info">NO:<% data.sort %><b><% data.vote_count %>票</b></div>
+			<div class="act"><span>已投<% data.my_vote_count %>票</span><button class="" type="button">投票</button></div>
+		</div>
+	</section>
+	<script>
+		var id = '{{ data.id }}';
+		var isClose = '{{ data.is_close }}';
+		var wxJsConfig = {
+	        "appid": "{{ wxJsConfig.appid }}",
+	        "timestamp": +new Date(),
+	        "signature": "{{ wxJsConfig.signature }}",
+	        "noncestr": "{{ wxJsConfig.signature }}"
+	    };
+		var webUrl = '{{ ctx.request.url }}';
+		var visible_group = '{{ data.visible_group }}';
+		var is_org_member = '{{ data.is_org_member }}';
+	</script>
+
+	<script src="/Public/mobile/js/zepto.js"></script>
+	<script src="/Public/mobile/js/YYMobile.js"></script>
+	<script src="/Public/mobile/js/md5.js"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="/Public/mobile/js/XMLib.js"></script>
+	<script src="/Public/mobile/js/vue.min.js"></script>
+	<script src="/Public/mobile/js/vote.js"></script>
+	<script>
+		Vue.config.delimiters = ['<%', '%>'];
+	</script>
+</body>
+</html>

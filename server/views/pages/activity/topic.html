@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>{{ data.title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-itunes-app" content="app-id=991635537,app-argument=xiaodao360://activity/detail/id/{{ data.id }}/type/3">
+	<meta name="screen-orientation" content="portrait" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="title" content="{{ data.title }}" />
+	<meta name="description" content="{{ data.desc }}" />
+	<meta itemprop="image" content="{{ data.thumb }}"/>
+	<link rel="stylesheet" href="/Public/mobile/css/XDWM.css">
+	<style>
+	.topic_page .page_ctn{
+        display: block;
+    }
+    </style>
+</head>
+<body pageWidth="360" class="topic_page">
+	<div class="page_ctn" act_type="3" act_id="{{ data.id }}">
+		<div class="active_detail">
+			<header>
+			    <dl class="member next_step" org_id="{{ data.organize_id }}"><dt><img data-organize="{{ data.organize_id }}" src="{{ data.organize.logo }}"/></dt><dd>{{ data.organize.name }}</dd></dl>
+				<h1 class="border_top">{{ data.title }}</h1>
+				<p class="close ">
+				{% if !data.is_close %}
+				截止时间：<span>{{ data.closeTag }}</span>
+				{% else %}
+					活动已结束
+				{% endif %}
+				</p>
+			</header>
+			{% if data.reward %}
+			<section class="prize border_top topic_borbtm">
+				<h3 class="border_bottom">活动奖励</h3>
+				<article>{{ data.reward }}</article>
+			</section>
+			{% endif %}
+			<section class="summary border_top topic_borbtm">
+				<!-- <h3 class="border_bottom">活动详情</h3> -->
+				<article class="content">{{ data.content }}</article>
+				<p class="right"><a href="javascript:void(0);" class="more">展开</a></p>
+			</section>
+			<section class="compere border_top">
+				<dl><dt>主持人({{ data.compereNum }})</dt><dd>
+					<ul>
+
+						{% for item in data.compere_list %}
+							<li><img src="{{ item.logo }}"/></li>
+						{% endfor %}
+					</ul>
+				</dd></dl>
+			</section>
+
+    		{% if data.relation_info && data.relation_info.status >= 0 %}
+			<section class="relative">
+				<h3 class="border_bottom">相关活动</h3>
+				<p>{{ data.relation_info.title }}</p>
+				<a href="{{ ctx.request.url }}/a/{{ data.relation_info.id }}">去看看</a>
+			</section>
+			{% endif %}
+			{% if data.campus_activity > 0 %}
+			<section class="campus_active" school_id="{{ data.campus_activity }}">
+				<dl class="next_step">
+					<dt></dt>
+					<dd><h3>其它校内活动</h3>点击查看该校所有校内活动</dd>
+				</dl>
+			</section>
+			{% endif %}
+		</div>
+
+		<ul class="comment_list">
+			<li class="idea" v-for="item in data" idea_id="<% item.id %>">
+				<div class="host">
+					<img v-bind:src="item.member.logo">
+					<b><%item.member.nickname%></b>
+					<i><font v-if="item.member.company!=''&&item.member.company!='null'"><%item.member.company%></font><font v-else> <%item.member.school_name%></font> <font v-if="item.member.job!=''&&item.member.job!='null'"><%item.member.job%></font></i>
+				</div>
+				<article><%item.content%><div class="img_list"><div v-for="photo in item.album"><img v-bind:src="photo.url"/></div></div></article>
+				<div class="act">
+					<time><%item.addtime%></time>
+					<button class="praise" type="button"><% item.like_num %></button><button class="comment" type="button"><% item.comment_num %></button>
+				</div>
+				<ol class="border_top" v-if="item.reply_list.length>0">
+					<li v-for="reply in item.reply_list" r_id="<%reply.id%>">
+						<% reply.member.nickname %><i v-if="reply.member.is_compere==1">主持人</i><span v-if="typeof reply.to_member.nickname!='undefined'">回复 <%reply.to_member.nickname%></span>：<%reply.content%>
+					</li>
+				</ol>
+				<dl v-if="item.reply_more==1" class="more border_top">更多回复</dl>
+			</li>
+			<section v-show="!data || data.length == 0" class="ended" style="display: none;">
+				<dl class="center">还没有内容</dl>
+			</section>
+			<section v-show="data.length > 0 && ended" class="ended" style="display: none;">
+				<dl class="center">评论已经全部加载完了</dl>
+			</section>
+			<div class="anchor"></div>
+		</ul>
+
+		<section class="action bottom border_top">
+		
+		 {% if data.is_close %}
+			<button type="button">已结束</button>
+		{% else %}
+			<button class="app" type="button">打开APP回复</button>
+		{% endif %}
+
+		<button type="button" class="order"></button></section>
+		<section class="filter">
+			<div class="mask"></div>
+			<div class="act">
+				<button class="d" val='1' type="button"><i></i>默认排序</button>
+				<button class="c" val='4' type="button"><i></i>只看主持人</button>
+				<button class="h" val='3' type="button"><i></i>看热门</button>
+				<button class="b" val='2' type="button"><i></i>倒序查看</button>
+				<button class="del" type="button"><i></i></button>
+			</div>
+		</section>
+	</div>
+	<script>
+		var id = '{{ data.id }}';
+		var isClose = '{{ data.is_close }}';
+		var wxJsConfig = {
+	        "appid": "{{ wxJsConfig.appid }}",
+	        "timestamp": +new Date(),
+	        "signature": "{{ wxJsConfig.signature }}",
+	        "noncestr": "{{ wxJsConfig.signature }}"
+	    };
+		var webUrl = '{{ ctx.request.url }}';
+		var thumb = '{{ data.thumb380 }}';
+	</script>
+
+<script src="/Public/mobile/js/zepto.js"></script>
+<script src="/Public/mobile/js/YYMobile.js"></script>
+<script src="/Public/mobile/js/md5.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="/Public/mobile/js/XMLib.js"></script>
+<script src="/Public/mobile/js/vue.min.js"></script>
+<script src="/Public/mobile/js/topic.js"></script>
+<script>
+	Vue.config.delimiters = ['<%', '%>'];
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+.ui-public-header{
+	background:#2D2E30;
+		.ui-container{
+			width:980px;
+			height:55px;
+			margin-bottom: 10px;
+			.lt{
+				float:left;
+			}
+			.rt{
+				float:right;
+			}
+			li{
+			 	color:#B0B0B0;
+			 	line-height:55px;
+			 	margin-right:10px;
+				a{
+					color:#B0B0B0;
+				}
+				a:hover{
+					cursor:pointer;
+				}
+			}
+	}
+}

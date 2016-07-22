@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<title>文档标题</title>
+<!-- webview控制信息 -->
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="format-detection" content="telephone=no">   <!-- 默认不启用数字拨号 -->
+<meta name="format-detection" content="email=no"/>  <!-- 默认不启用email -->
+<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- 启用 WebApp 全屏模式 -->
+<meta name="apple-mobile-web-app-title" content="标题">   <!-- 添加到主屏后标题 -->
+<!-- 页面爬虫与rich信息 -->
+<meta itemprop="name" content="文档标题">
+<meta name="keywords" itemprop="keywords" content="关键字">
+<meta name="description" itemprop="description" content="描述">
+<meta itemprop="image" content="http://9.url.cn/edu/common/img/src/logo_pc_rich.png">
+<meta name="robots" content="index,follow" />
+<!-- cdn域名预解析 -->
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="http://cdn.source.com">
+<link rel="stylesheet" type="text/css" href="/pkg/pages/index/main_min.css"></head>
+<body>
+<script data-loader>/**
+* file: mod.js
+* ver: 1.0.11
+* update: 2015/05/14
+*
+* https://github.com/fex-team/mod
+*/
+var require, define;
+(function(global) {
+if (require) return; // 避免重复加载而导致已定义模块丢失
+var head = document.getElementsByTagName('head')[0],
+loadingMap = {},
+factoryMap = {},
+modulesMap = {},
+scriptsMap = {},
+resMap = {},
+pkgMap = {};
+function createScript(url, onerror) {
+if (url in scriptsMap) return;
+scriptsMap[url] = true;
+var script = document.createElement('script');
+if (onerror) {
+var tid = setTimeout(onerror, require.timeout);
+script.onerror = function() {
+clearTimeout(tid);
+onerror();
+};
+function onload() {
+clearTimeout(tid);
+}
+if ('onload' in script) {
+script.onload = onload;
+} else {
+script.onreadystatechange = function() {
+if (this.readyState == 'loaded' || this.readyState == 'complete') {
+onload();
+}
+}
+}
+}
+script.type = 'text/javascript';
+script.src = url;
+document.body.appendChild(script);
+return script;
+}
+function loadScript(id, callback, onerror) {
+var queue = loadingMap[id] || (loadingMap[id] = []);
+queue.push(callback);
+//
+// resource map query
+//
+var res = resMap[id] || resMap[id + '.js'] || {};
+var pkg = res.pkg;
+var url;
+if (pkg) {
+url = pkgMap[pkg].url;
+} else {
+url = res.url || id;
+}
+// console.log(id, url);
+createScript(url, onerror && function() {
+onerror(id);
+});
+}
+define = function(id, factory) {
+id = id.replace(/\.js$/i, '');
+factoryMap[id] = factory;
+var queue = loadingMap[id];
+if (queue) {
+for (var i = 0, n = queue.length; i < n; i++) {
+queue[i]();
+}
+delete loadingMap[id];
+}
+};
+require = function(id) {
+// compatible with require([dep, dep2...]) syntax.
+if (id && id.splice) {
+return require.async.apply(this, arguments);
+}
+id = require.alias(id);
+var mod = modulesMap[id];
+if (mod) {
+return mod.exports;
+}
+//
+// init module
+//
+var factory = factoryMap[id];
+if (!factory) {
+throw '[ModJS] Cannot find module `' + id + '`';
+}
+mod = modulesMap[id] = {
+exports: {}
+};
+//
+// factory: function OR value
+//
+var ret = (typeof factory == 'function') ? factory.apply(mod, [require, mod.exports, mod]) : factory;
+if (ret) {
+mod.exports = ret;
+}
+return mod.exports;
+};
+require.async = function(names, onload, onerror) {
+if (typeof names == 'string') {
+names = [names];
+}
+var needMap = {};
+var needNum = 0;
+function findNeed(depArr) {
+for (var i = 0, n = depArr.length; i < n; i++) {
+//
+// skip loading or loaded
+//
+var dep = require.alias(depArr[i]);
+if (dep in factoryMap) {
+// check whether loaded resource's deps is loaded or not
+var child = resMap[dep] || resMap[dep + '.js'];
+if (child && 'deps' in child) {
+findNeed(child.deps);
+}
+continue;
+}
+if (dep in needMap) {
+continue;
+}
+needMap[dep] = true;
+needNum++;
+loadScript(dep, updateNeed, onerror);
+var child = resMap[dep] || resMap[dep + '.js'];
+if (child && 'deps' in child) {
+findNeed(child.deps);
+}
+}
+}
+function updateNeed() {
+if (0 == needNum--) {
+var args = [];
+for (var i = 0, n = names.length; i < n; i++) {
+args[i] = require(names[i]);
+}
+onload && onload.apply(global, args);
+}
+}
+findNeed(names);
+updateNeed();
+};
+require.resourceMap = function(obj) {
+var k, col;
+// merge `res` & `pkg` fields
+col = obj.res;
+for (k in col) {
+if (col.hasOwnProperty(k)) {
+resMap[k] = col[k];
+}
+}
+col = obj.pkg;
+for (k in col) {
+if (col.hasOwnProperty(k)) {
+pkgMap[k] = col[k];
+}
+}
+};
+require.loadJs = function(url) {
+createScript(url);
+};
+require.loadCss = function(cfg) {
+if (cfg.content) {
+var sty = document.createElement('style');
+sty.type = 'text/css';
+if (sty.styleSheet) { // IE
+sty.styleSheet.cssText = cfg.content;
+} else {
+sty.innerHTML = cfg.content;
+}
+head.appendChild(sty);
+} else if (cfg.url) {
+var link = document.createElement('link');
+link.href = cfg.url;
+link.rel = 'stylesheet';
+link.type = 'text/css';
+head.appendChild(link);
+}
+};
+require.alias = function(id) {
+return id.replace(/\.js$/i, '');
+};
+require.timeout = 5000;
+})(this);;require.resourceMap({"res":{"badjs":{"pkg":"p0","deps":["badjs-report"]},"badjs-report":{"pkg":"p0"},"zepto":{"pkg":"p1"},"frozen":{"pkg":"p2","deps":["zepto"]},"pages/index/main.js":{"pkg":"p3","deps":["localAjax","search-bar","page-menu","dialog","banner-2","banner-3","slider","tab","panel-3"]},"localAjax":{"pkg":"p3","deps":["zepto","localStorage","md5"]},"search-bar":{"pkg":"p3","deps":["label-list"]},"page-menu":{"pkg":"p3","deps":["page-menu.tpl"]},"dialog":{"pkg":"p3"},"banner-2":{"pkg":"p3","deps":["banner-2.tpl"]},"banner-3":{"pkg":"p3","deps":["banner-3.tpl"]},"slider":{"pkg":"p3","deps":["slider.tpl"]},"tab":{"pkg":"p3","deps":["tab-recmend","tab-more"]},"panel-3":{"pkg":"p3","deps":["panel-3.tpl"]},"localStorage":{"pkg":"p3","deps":["zepto"]},"md5":{"pkg":"p3","deps":["zepto"]},"label-list":{"pkg":"p3","deps":["label-list.tpl"]},"page-menu.tpl":{"pkg":"p3"},"banner-2.tpl":{"pkg":"p3"},"banner-3.tpl":{"pkg":"p3"},"slider.tpl":{"pkg":"p3"},"tab-recmend":{"pkg":"p3","deps":["tab-recmend.tpl"]},"tab-more":{"pkg":"p3","deps":["tab-more.tpl"]},"panel-3.tpl":{"pkg":"p3"},"label-list.tpl":{"pkg":"p3"},"tab-recmend.tpl":{"pkg":"p3"},"tab-more.tpl":{"pkg":"p3"},"testMod":{"pkg":"p4","deps":["localAjax","testMod.tpl"]},"testMod.tpl":{"pkg":"p4"},"testMod1":{"pkg":"p4","deps":["localAjax","testMod1.tpl"]},"testMod1.tpl":{"pkg":"p4"}},"pkg":{"p0":{"url":"/pkg/badjs.min.js"},"p1":{"url":"/pkg/zepto.min.js"},"p2":{"url":"/pkg/frozen.min.js"},"p3":{"url":"/pkg/pages/index/main.js.min.js"},"p4":{"url":"/pkg/pages/index/main.js_async.min.js"}}});</script>
+<div id="ui-search-bar" class="ui-searchbar-wrap ui-border-b ui-searchbar-fixed">
+<div class="ui-searchbar ui-border-radius">
+<i class="ui-icon-search"></i>
+<div class="ui-searchbar-text">搜索号码（2-10位）</div>
+<div class="ui-searchbar-input"><input value="" type="tel" placeholder="搜索号码（2-10位）" autocapitalize="off"></div>
+<i class="ui-icon-close"></i>
+</div>
+<button class="ui-searchbar-cancel">取消</button>
+</div>
+<div id="ui-label-panel" class="ui-label-panel transition">
+<div class="ui-label-list">
+{% for item1 in keywords %}
+<label class="ui-label">{{item1}}</label>
+{% endfor %}
+</div>
+</div>
+<script></script><div id="ui-page-menu" class="ui-slider ui-page-menu">
+<ul id="ui-slider-content" class="ui-slider-content" style="width: 200%">
+<li>
+<ul class="page">
+{% for item in pageMenu %}
+{% if loop.index > 0 && loop.index % 8 == 0 %}
+</ul>
+</li>
+<li>
+<ul class="page">
+{% endif %}
+<li class="page-item {% if loop.first %}first{% else %}{{loop.index}}{% endif %}" data-href="{{ item.url }}">
+<span class="page-item-bd {{ item.icon }}" style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+<span class="page-item-ft">{{ item.title }}</span>
+</li>
+{% endfor %}
+</ul>
+</li>
+</ul>
+</div><div id="ui-slider" class="ui-slider">
+<ul class="ui-slider-content" style="width: 300%">
+{% for item in slider %}
+<li>
+<a href="{{ item.url }}">
+<img src="{{ item.image }}" alt="{{ item.title }}">
+</a>
+</li>
+{% endfor %}
+</ul>
+</div>
+<script></script>
+<!--
+@require "component/dialog/index.scss"
+-->
+<div id="ui-dialog" class="ui-dialog">
+<div class="ui-dialog-cnt">
+<header class="ui-dialog-hd ui-border-b">
+<h3>新手任务</h3>
+<i class="ui-dialog-close" data-role="button"></i>
+</header>
+<div class="ui-dialog-bd">
+<h4>标题标题</h4>
+<div>开通年费QQ会员即可领取欢乐斗地主感恩节回馈礼包！</div>
+</div>
+<div class="ui-dialog-ft">
+<button type="button" data-role="button">取消</button>
+<button type="button" data-role="button">开通</button>
+</div>
+</div>
+</div>
+<ul id="ui-banner-2" class="ui-list ui-border-tb ui-banner-2">
+{% for item in banner2 %}
+<li class="ui-border-t">
+<div class="ui-list-img">
+<img src="{{ item.image }}" alt="{{item.title}}" width="60" height="60">
+</div>
+<div class="ui-list-info">
+<p class="ui-nowrap">{{item.title}}</p>
+<p class="ui-nowrap">{{item.title}}</p>
+</div>
+</li>
+{% endfor %}
+</ul><section id="ui-banner-3" class="ui-panel ui-banner-3">
+<ul class="ui-grid-trisect">
+{% for item in banner3.list %}
+<li>
+<div class="ui-border">
+<div class="ui-grid-trisect-img">
+<a href="{{ item.url }}">
+<img src="{{ item.image }}" alt="">
+</a>
+</div>
+<div>
+<h4 class="ui-nowrap-multi">{{ item.title }}</h4>
+</div>
+</div>
+</li>
+{% endfor %}
+</ul>
+</section><script></script><section id="ui-panel-3" class="ui-panel">
+<h2 class="ui-arrowlink" data-href="{{ panel3.url }}">
+{{ panel3.title }}<span class="ui-panel-subtitle">{{ panel3.total || 0 }}条</span>
+</h2>
+<ul class="ui-grid-trisect">
+{% for item in panel3.list %}
+<li>
+<div class="ui-border">
+<div class="ui-grid-trisect-img">
+<a href="{{ item.url }}">
+<img src="{{ item.image }}" alt="">
+</a>
+</div>
+<div>
+<h4 class="ui-nowrap-multi">{{ item.title }}</h4>
+<h5 class="ui-nowrap">{{ item.desc }}</h5>
+</div>
+</div>
+</li>
+{% endfor %}
+</ul>
+</section>
+<!--
+@require "component/tab/index.scss"
+-->
+<div class="ui-tab">
+<ul class="ui-tab-nav ui-border-b">
+<li class="current">热门推荐</li>
+<li>全部表情</li>
+</ul>
+<ul class="ui-tab-content">
+<li class="current">
+<ul id="ui-recmend-list" class="ui-list ui-border-tb" data-type="hidden">
+{% for item in tabRecmend.list %}
+<li class="ui-border-t" data-href="{{ item.url }}">
+<div class="ui-list-img">
+<a href="{{ item.url }}">
+<img src="{{ item.image }}" alt="{{ item.title }}" width="90" height="70">
+</a>
+</div>
+<div class="ui-list-info">
+<h4 class="ui-nowrap">{{ item.title }}</h4>
+<p class="ui-nowrap">{{ item.desc }}</p>
+</div>
+</li>
+{% endfor %}
+</ul>
+<div class="ui-loading-wrap">
+<p>加载中</p>
+<i class="ui-loading"></i>
+</div>
+</li>
+<li>
+<ul id="ui-more-list" class="ui-list ui-border-tb" data-type="hidden">
+{% for item in tabRecmend.list %}
+<li class="ui-border-t" data-href="item.url">
+<div class="ui-list-img">
+<img src="{{ item.image }}" alt="{{ item.title }}" width="90" height="70">
+</div>
+<div class="ui-list-info">
+<h4>{{ item.title }}</h4>
+</div>
+</li>
+{% endfor %}
+</ul>
+<div class="ui-loading-wrap">
+<p>加载中</p>
+<i class="ui-loading"></i>
+</div>
+</li>
+</ul>
+</div>
+<script></script>
+<script>
+require.async(['badjs'], function(badjs) {
+badjs.init({
+id: '2016'
+});
+});
+require.async(['zepto','frozen','pages/index/main'], function($, frozen, main) {
+main.init();
+});
+</script>
+</body>
+</html>

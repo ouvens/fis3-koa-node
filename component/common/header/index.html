@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="./index.scss">
+<div class="ui-public-header" id="publicHeader">
+		<ul class="container-fluid ui-container">	
+			<li class="lt">
+				<a href="http://www.xiaodao360.com">去校导官网</a>
+			</li >
+			<li class="rt exit" style="display:none;">
+				<a>退出</a>
+			</li>
+			<li class="rt user_name">
+				<input type="hidden" name="nickname" value="{{userInfo.nickname}}">
+				{{userInfo.nickname}}
+			</li>
+			<li class="rt login">
+				<a href="">登录</a>
+			</li> 
+		</ul>	
+</div>
+<script>
+	window.user = {{userInfo | json | safe}};
+</script>
