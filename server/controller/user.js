@@ -90,9 +90,7 @@ const reactController = function*(req, res) {
 		return JSON.stringify(obj).replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--')
 	}
 
-	ctx.body = yield render(ctx, 'pages/react', {
-		session: ctx.session
-	});
+	ctx.body = yield render(ctx, 'pages/react', {});
 }
 
 module.exports = {

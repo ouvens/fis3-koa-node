@@ -10,6 +10,10 @@ var serverDist = './server/pages';
 fis.set('project.md5Connector', '-');
 fis.hook('commonjs');
 
+fis.config.set('project.fileType.text', 'rt'); //*.jsx files are text file. 
+fis.config.set('modules.parser.rt', 'react'); //compile *.jsx with fis-parser-react plugin 
+fis.config.set('roadmap.ext.rt', 'js'); //*.jsx are exactly treat as *.js 
+
 /**
  * 配置进行处理的目录或文件
  */
@@ -51,6 +55,15 @@ fis.match('libs/**.min.js', {
     .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.js$/i, {
         isMod: true,
         id: '$2'
+    })
+    // 公共组件id匹配
+    .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.rt$/i, {
+        isMod: true,
+        rExt: 'js',
+        id: '$1/$2.rt',
+        moduleId: '$1/$2.rt',
+        release: '$1/$2.rt', // 发布的后的文件名，避免和同目录下的 js 冲突
+        parser: fis.plugin('react')
     })
     .match('pages/**.js', {
         isMod: true

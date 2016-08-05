@@ -8,14 +8,15 @@
 
 var $ = require('jquery');
 var Component = require('comBase');
+var react = require('./main.rt');
 
 var tpl = require('./index.tpl');
 
 var component = new Component($('#loginForm'), tpl);
 
 component.extend({
-    _bindEvent: function() {},
-    _checkAuth: function() {}
+	_bindEvent: function() {},
+	_checkAuth: function() {}
 })
 
 module.exports = component;
