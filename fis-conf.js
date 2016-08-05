@@ -34,8 +34,8 @@ fis.match('libs/**.min.js', {
         isMod: true,
         rExt: 'js',
         id: '$1/$2.tpl',
-        moduleId: '$1/$2.tpl',
         release: '$1/$2.tpl', // 发布的后的文件名，避免和同目录下的 js 冲突
+        moduleId: '$1/$2.tpl',
         parser: fis.plugin('swig')
     })
     .match(/^\/libs\/.+\/(.+)\.js$/i, {
@@ -46,10 +46,6 @@ fis.match('libs/**.min.js', {
     .match(/libs\/mod\/(mod)\.js$/i, {
         packTo: '/libs/$1.js',
         isMod: false
-    })
-    .match(/^\/(component|asyncComponent)\/(.+)\/main\.js$/i, {
-        isMod: true,
-        id: '$2'
     })
     // 公共组件id匹配
     .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.js$/i, {
@@ -118,7 +114,7 @@ fis.media('server')
             to: serverDev
         })
     })
-    .match('**.{ttf, eot, tpl, png}', {
+    .match('**.{ttf, eot, png}', {
         deploy: fis.plugin('local-deliver', {
             to: serverDev
         })

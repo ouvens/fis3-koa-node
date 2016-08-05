@@ -135,10 +135,5 @@ const userLogout = function*(req, res) {
 
 module.exports = {
 	userAuth: userAuth,
-	userLogout: userLogout,
-	userCity: userCity,
-	userSchool: userSchool,
-	userInfo: userInfo,
-	loginCallback: loginCallback,
-	userEnroll: userEnroll
+	userLogout: userLogout
 }

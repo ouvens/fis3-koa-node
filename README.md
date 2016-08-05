@@ -1,4 +1,11 @@
 
+[![Build Status][build-badge-img]][build-url]
+[![NPM version][npm-version-img]][npm-url]
+[![NPM downloads per month][npm-downloads-img]][npm-url]
+[![Chat on Slack][slack-img]][slack-url]
+[![NPM license][npm-license-img]][npm-url]
+[![Powered by Redfin][redfin-img]][redfin-url]
+
 # koa + fis3 + swig 前后端同构方案
 
 [架构设计文章](https://ouvens.github.io/frontend-build/2016/04/21/koa-fis3-swig-nodejs-isomorphic.html)

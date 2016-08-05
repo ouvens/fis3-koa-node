@@ -4,7 +4,7 @@
  */
 var $ = require('jquery');
 
-var userForm = require('login-form');
+var userForm = require('react-com');
 
 var tpl = require('./index.tpl');
 var Component = require('comBase');

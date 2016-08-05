@@ -12,11 +12,6 @@ const render = require('../lib/render');
 const config = require('./common/config');
 
 const userApi = require('./api/user');
-const orgApi = require('./api/organization');
-const actApi = require('./api/activity');
-const statusApi = require('./api/status');
-
-
 
 module.exports = {
 	userAuth: userApi.userAuth,

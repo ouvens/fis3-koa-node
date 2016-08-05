@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "fis-parser-imweb-tplv2": "0.0.3",
+    "fis-parser-react": "^0.13.3",
     "fis3-parser-babel": "^1.2.4",
     "fis3-parser-node-sass": "0.0.1",
     "fis3-parser-swig": "0.0.4"

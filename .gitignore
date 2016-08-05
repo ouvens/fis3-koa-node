@@ -7,6 +7,9 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
+node_modules
+server/dev
+server/pages
 
 # Windows Installer files
 *.cab
