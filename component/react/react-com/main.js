@@ -8,7 +8,7 @@
 
 var $ = require('jquery');
 var Component = require('comBase');
-var react = require('./main.rt');
+// var react = require('./main.rt');
 
 var tpl = require('./index.tpl');
 

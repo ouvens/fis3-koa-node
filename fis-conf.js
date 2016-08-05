@@ -10,9 +10,9 @@ var serverDist = './server/pages';
 fis.set('project.md5Connector', '-');
 fis.hook('commonjs');
 
-fis.config.set('project.fileType.text', 'rt'); //*.jsx files are text file. 
-fis.config.set('modules.parser.rt', 'react'); //compile *.jsx with fis-parser-react plugin 
-fis.config.set('roadmap.ext.rt', 'js'); //*.jsx are exactly treat as *.js 
+fis.config.set('project.fileType.text', 'jsx'); //*.jsx files are text file. 
+fis.config.set('modules.parser.jsx', 'react'); //compile *.jsx with fis-parser-react plugin 
+fis.config.set('roadmap.ext.jsx', 'jsx'); //*.jsx are exactly treat as *.js 
 
 /**
  * 配置进行处理的目录或文件
@@ -56,13 +56,20 @@ fis.match('libs/**.min.js', {
         isMod: true,
         id: '$2'
     })
-    // 公共组件id匹配
-    .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.rt$/i, {
-        isMod: true,
-        rExt: 'js',
-        id: '$1/$2.rt',
-        moduleId: '$1/$2.rt',
-        release: '$1/$2.rt', // 发布的后的文件名，避免和同目录下的 js 冲突
+    // 进行前端引用输出
+    // .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.rt$/i, {
+    //     isMod: true,
+    //     rExt: 'js',
+    //     id: '$1/$2.rt',
+    //     moduleId: '$1/$2.rt',
+    //     release: '$1/$2.rt', // 发布的后的文件名，避免和同目录下的 js 冲突
+    //     parser: fis.plugin('react')
+    // })
+    // 进行服务端目录下输出内容
+    .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.jsx$/i, {
+        rExt: 'jsx',
+        isMod: false,
+        id: '$1',
         parser: fis.plugin('react')
     })
     .match('pages/**.js', {
@@ -100,7 +107,7 @@ fis.match('libs/**.min.js', {
             output: 'pkg/${id}.min.js',
             jsAllInOne: false
         })]
-    });;
+    });
 
 /**
  * 服务端开发
@@ -112,6 +119,11 @@ fis.media('server')
         })
     })
     .match('/{pkg,libs,asyncComponent}/**.js', {
+        deploy: fis.plugin('local-deliver', {
+            to: serverDev
+        })
+    })
+    .match('/{pkg,libs,component,asyncComponent}/**.jsx', {
         deploy: fis.plugin('local-deliver', {
             to: serverDev
         })
