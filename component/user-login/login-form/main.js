@@ -6,7 +6,6 @@
  * _bindEvent() //事件绑定
  */
 
-var $ = require('jquery');
 var Component = require('comBase');
 var md5 = require('md5');
 var validator = require('validator');
@@ -18,12 +17,14 @@ var placeholder = require('placeholder');
 var component = new Component($('#loginForm'), tpl);
 
 component.extend({
+    init: function() {
+        var self = this;
+        self._bindEvent();
+    },
     _bindEvent: function() {
         var self = this;
 
         placeholder.init($);
-
-        self._checkAuth();
 
         self.$el.on('click', '.btn-submit', function(e) {
             var isVali = validator.all($('input[data-pattern]'));
@@ -56,12 +57,13 @@ component.extend({
                 dataType: 'json',
 
                 success: function(data) {
+                    console.log(data);
                     var backUrl = util.url.getUrlParam('backUrl');
-                    if (data.id) {
+                    if (data.code && data.code === 200) {
                         if (backUrl) {
                             window.location.href = backUrl;
                         } else {
-                            window.location.href = 'http://www.xiaodao360.com';
+                            window.location.href = '#';
                         }
                     } else {
                         self.$el.find('.tips').eq(0).show().find('span').html(data.error || '服务器请求错误');
@@ -78,12 +80,6 @@ component.extend({
                 this.value = this.value.slice(0, 10);
             }
         });
-    },
-    _checkAuth: function() {
-        var self = this;
-        if (self.$el.data('session-mid')) {
-            // location.href="http://www.baidu.com";
-        }
     }
 })
 

@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="./index.scss">
+<div id="ui-slider" class="ui-slider">
+    <ul class="ui-slider-content" style="width: 300%">
+        {% for item in slider %}
+            <li>
+                <a href="{{ item.url }}">
+                    <img src="{{ item.image }}" alt="{{ item.title }}">
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<script></script>

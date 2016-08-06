@@ -1,0 +1,79 @@
+
+.ui-org-header{
+	padding: 0 1rem; 
+	.top-banner{
+		position: relative;
+		height: 16.5rem;
+		font-size: 1.4rem;
+		border-bottom: 0.1rem dashed #31c27c;
+		padding-top: 1rem;
+		h2{
+			color: #333;
+			font-weight: bold;
+			line-height: 3rem;
+		}
+		h4{
+			width: 5.5rem;
+			height: 2.2rem;
+			line-height: 2.2rem;
+		    margin-top: 2.5rem;
+		    text-align: center;
+		    color: #fff;
+		    background-color: #ffb103;
+		    border-bottom-right-radius: 10px;
+		    border-top-right-radius: 10px;
+		}
+		.ui-avatar-one{
+			margin: 0 auto;
+		}
+
+		.desc{
+			text-align: center;
+			line-height: 2rem;
+		}
+
+		.btn-group{
+			margin-top: 0.5rem;
+			.btn{
+				height: 2rem;
+				line-height: 1.5rem;
+				padding: 0.2rem 1rem;
+				border-radius: 0.2rem;
+				border: 1px solid #31c27c;
+			}
+			.btn-join{
+				color: #31c27c;
+			}
+			.btn-up{
+				position: relative;
+				color: #888;
+				border: 1px solid #888;
+				margin-left: 1rem;
+				padding-left: 2.5rem;
+			}
+			.ui-icon-liked{
+				position: absolute;
+				left: 0.5rem;
+				top: 0.1rem;
+				line-height: 1.5rem;
+				height: 2.5rem;
+				font-size: 2.5rem;
+				color: #f77056;
+
+			}
+		}
+	}
+	h2.ui-txt-justify-one{
+		width: 6rem;
+		padding: 0 1rem;
+		position: relative;
+		top: -1rem;
+		margin: 0 auto;
+		background-color: #fff;
+		color: #31c27c;
+	}
+	.ui-txt-justify{
+		font-size: 1.6rem;
+		text-indent: 2rem;
+	}
+}

@@ -18,9 +18,9 @@ const app = koa();
 app.use(logger());
 
 //设置静态目录内容
-app.use(serve('./pages')).use(serve('./dev'));
+app.use(serve('./pages')).use(serve('./dev')).use(serve('./mock'));
 
-app.keys = ['xiaodao360'];
+app.keys = ['site.com'];
 app.use(session({
 	store: {
 		host: process.env.SESSION_PORT_6379_TCP_ADDR || '127.0.0.1',

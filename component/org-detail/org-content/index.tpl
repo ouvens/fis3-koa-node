@@ -1,0 +1,21 @@
+
+<div class="ui-border-b top-banner">
+    <div class="ui-avatar-one">
+    <span style="background-image:url({{ data.logo }})"></span>
+    </div>
+    <div class="desc">
+        <h2>{{ data.name }}</h2>
+        <h5><span>动态:{{ data.msg||0 }}</span>/<span>关注:{{ data.follow||0 }}</span></h5>
+        <div class="btn-group">
+            <button class="btn btn-join">进社团</button>
+            <button class="btn btn-up"><i class="ui-icon-liked"></i>{{ data.up }}</button>
+        </div>
+    </div>
+</div>
+<h2 class="ui-txt-justify-one">社团介绍</h2>
+<div>
+    <p class="ui-txt-justify">{{ data.desc }}</p>
+    <div class="ui-placehold-img">
+        <span style="background-image:url(//9.url.cn/edu/banner/img/2aadd0f8_760_300.png)"></span>
+    </div>
+</div>

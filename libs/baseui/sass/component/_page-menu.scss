@@ -1,0 +1,46 @@
+@import
+
+    "../base/mixin",
+    "../base/variable";
+
+/**
+ * 轮播分页菜单组件
+ */
+.ui-page-menu{
+    padding-top: 50%;
+    background-color: #fff;
+    border-bottom: $section-border;
+}
+
+.ui-page-menu .page{
+    width: 100%;
+    height: 100%;
+}
+
+.ui-page-menu .page-item{
+    float: left;
+    width: 25%;
+    height: 50%;
+    text-align: center;
+    font-size: 0;
+}
+
+.ui-page-menu .page-item-bd{
+    margin: 12% 20% 0 20%;
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.ui-page-menu .page-item-ft{
+    height: 2em;
+    line-height: 2em;
+    font-size: 14px;
+}
+
+.ui-page-menu .ui-slider-indicators {
+    width: 6%;
+    left: 50%;
+    margin-left: -5%;
+}

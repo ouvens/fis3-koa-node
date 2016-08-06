@@ -11,6 +11,7 @@ const views = require('co-views');
  */
 const render = function(ctx, path, data) {
 	let tplPath;
+	// 如果是本地则使用dev环境目录，否则使用page的构建目录
 	if (ctx.hostname === '127.0.0.1' || ctx.hostname === 'localhost') {
 		tplPath = '/../dev/';
 	} else {

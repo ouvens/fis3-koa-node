@@ -1,0 +1,21 @@
+<ul id="ui-recmend-list" class="ui-list ui-border-tb" data-type="hidden">
+
+    {% for item in tabRecmend.list %}
+        <li class="ui-border-t" data-href="{{ item.url }}">
+            <div class="ui-list-img">
+                <a href="{{ item.url }}">
+                    <img src="{{ item.image }}" alt="{{ item.title }}" width="90" height="70">
+                </a>
+            </div>
+            <div class="ui-list-info">
+                <h4 class="ui-nowrap">{{ item.title }}</h4>
+                <p class="ui-nowrap">{{ item.desc }}</p>
+            </div>
+        </li>
+    {% endfor %}
+
+</ul>
+<div class="ui-loading-wrap">
+    <p>加载中</p>
+    <i class="ui-loading"></i>
+</div>

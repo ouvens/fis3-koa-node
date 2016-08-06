@@ -2,13 +2,6 @@
 
 <script>
 
-// var wxJsConfig = {
-//     "appid": "{{ wxJsConfig.appid }}",
-//     "timestamp": "{{ wxJsConfig.timestamp }}",
-//     "signature": "{{ wxJsConfig.signature }}",
-//     "noncestr": "{{ wxJsConfig.signature }}"
-// };
-
 require.async(['badjs'], function(badjs) {
     badjs.init({
         id: 68157333,
@@ -23,7 +16,7 @@ require.async(['badjs'], function(badjs) {
     });
 });
 
-require.async(['jquery', './main'], function($, main) {
+require.async(['react', 'react-dom', 'jquery', './main'], function(react, reactDom, $, main) {
     main.init();
 });
 

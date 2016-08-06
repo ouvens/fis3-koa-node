@@ -1,0 +1,18 @@
+@import
+
+    "../base/mixin",
+    "../base/variable";
+
+.ui-sign{
+    display: inline-block;
+    width: auto;
+    padding: 0.1rem 0.5rem;
+    margin: 2.5rem 0.5rem;
+    border: 0.1rem solid #e0e0e0;
+    border-radius: 3px;
+    font-style: italic;
+    font-size: 1.2rem;
+    .number{
+        color: #31c27c;
+    }
+}

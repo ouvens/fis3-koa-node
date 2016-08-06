@@ -1,0 +1,58 @@
+
+.ui-rank-top{
+	.rank-top-list{
+		position: relative;
+		height: 14.5rem;
+		font-size: 1.4rem;
+		color: #888;
+		border-bottom: 0.1rem solid #e0e0e0;
+		h2{
+			color: #f77056;
+			line-height: 3rem;
+		}
+		h4{
+			width: 5.5rem;
+			height: 2.2rem;
+			line-height: 2.2rem;
+		    margin-top: 2.5rem;
+		    text-align: center;
+		    color: #fff;
+		    background-color: #ffb103;
+		    border-bottom-right-radius: 10px;
+		    border-top-right-radius: 10px;
+		}
+
+		.ui-sign{
+			margin: 0.5rem 0;
+			line-height: 1.6rem;
+		}
+
+		.ui-avatar-one{
+			position: absolute;
+			z-index: 9;
+			left: 50%;
+			width: 6rem;
+			height: 6rem;
+			top: -2rem;
+			margin-left: -3rem;
+		}
+
+		.desc{
+			text-align: center;
+			margin-top: 2rem;
+			line-height: 2rem;
+		}
+
+	}
+	.top-first{
+		h4{
+			margin-top: 1rem;
+		}
+		.ui-avatar-one{
+			width: 8rem;
+			height: 8rem;
+			top: -5rem;
+			margin-left: -4rem;
+		}
+	}
+}

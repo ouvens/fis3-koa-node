@@ -12,7 +12,8 @@ let util = {
 	session: emptyObject,
 	cookie: emptyObject,
 	html: emptyObject,
-	string: emptyObject
+	string: emptyObject,
+	extend: _extend
 }
 
 /**
@@ -99,15 +100,24 @@ function _str2json(string) {
 	let url = string; //获取url中"?"符后的字串
 	let obj = {};
 	let str;
-	if (url.indexOf("?") != -1) {
-		str = url.substr(1);
+	if (url && url.indexOf("?") != -1) {
+		str = url.split('?')[1];
 	}
-
-	let strs = str.split("&");
-	for (let i = 0; i < strs.length; i++) {
-		obj[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+	if (str) {
+		let strs = str.split("&");
+		for (let i = 0; i < strs.length; i++) {
+			obj[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+		}
+		return obj;
+	} else {
+		return {}
 	}
-	return obj;
 }
 
+function _extend(oldObject, object) {
+	for (let item in object) {
+		oldObject[item] = object[item];
+	}
+	return oldObject;
+}
 module.exports = util;

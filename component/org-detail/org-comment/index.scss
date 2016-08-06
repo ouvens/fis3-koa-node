@@ -1,0 +1,34 @@
+
+.ui-comment{
+	margin: 1rem 0 5rem 0;
+	padding-bottom: 2rem;
+	border: none;
+	.devider{
+		border-bottom: 1px solid #ccc;
+		margin: 0 1rem;
+		text-align: right;
+		font-size: 1.4rem;
+		i{
+			font-size: 2.5rem;
+		}
+	}
+	.ui-list > li{
+		margin-left: 1rem;
+	}
+	.ui-avatar-tiled{
+		margin: 1rem 1rem 0 0
+	}
+	.ui-list-info{
+		line-height: 2rem;
+		.name{
+			color: #333;
+			margin-right: 1rem;
+		}
+		.comment{
+			color: #333;
+			.name{
+				color: #31c27c;
+			}
+		}
+	}
+}

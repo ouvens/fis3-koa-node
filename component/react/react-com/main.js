@@ -6,17 +6,13 @@
  * _bindEvent() //事件绑定
  */
 
-var $ = require('jquery');
-var Component = require('comBase');
-// var react = require('./main.rt');
+var React = require('react');
+var ReactDOM = require('react-dom');
 
-var tpl = require('./index.tpl');
+console.log(React, ReactDOM);
 
-var component = new Component($('#loginForm'), tpl);
-
-component.extend({
-	_bindEvent: function() {},
-	_checkAuth: function() {}
-})
-
-module.exports = component;
+module.exports = {
+	init: function() {
+		console.log('init');
+	}
+};

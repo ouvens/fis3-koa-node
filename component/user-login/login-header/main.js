@@ -6,7 +6,6 @@
  * _bindEvent() //事件绑定
  */
 
-var $ = require('jquery');
 var Component = require('comBase');
 
 var tpl = require('./index.tpl');

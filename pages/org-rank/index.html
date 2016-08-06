@@ -1,0 +1,25 @@
+
+<link rel="stylesheet" href="./index.scss">
+
+<script>
+
+var wxJsConfig = {
+    "appid": "{{ wxJsConfig.appid }}",
+    "timestamp": "{{ wxJsConfig.timestamp }}",
+    "signature": "{{ wxJsConfig.signature }}",
+    "nonceStr": "{{ wxJsConfig.nonceStr }}"
+};
+
+require.async(['badjs'], function(badjs) {
+    badjs.init({
+        id: '2018'
+    });
+});
+
+require.async(['zepto', './main'], function($, main) {
+    main.init();
+});
+
+</script>
+
+

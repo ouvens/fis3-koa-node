@@ -1,0 +1,35 @@
+@import
+
+    "../base/mixin",
+    "../base/variable";
+
+/**
+ * 圆角头像，列表场景
+ */
+
+.ui-avatar,
+.ui-avatar-lg,
+.ui-avatar-s,
+.ui-avatar-one,
+.ui-avatar-tiled{
+    display: block;
+    -webkit-background-size: cover;
+    background-color: #ccc;
+}
+.ui-avatar{
+    @include avatar;
+}
+.ui-avatar-lg,
+.ui-avatar-one{
+    @include avatar($avatar-width-lg);
+}
+
+.ui-avatar-s{
+    @include avatar($avatar-width-s);
+}
+
+/* 平铺场景 */
+.ui-avatar-tiled{
+    @include avatar($avatar-width-tiled);
+    display: inline-block;
+}
