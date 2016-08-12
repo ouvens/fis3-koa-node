@@ -34,7 +34,9 @@ app.use(session({
 app.use(koaBody({
 	formidable: {
 		uploadDir: __dirname
-	}
+	},
+	jsonLimit: '10mb',
+	formLimit: '10mb'
 }));
 
 /**
