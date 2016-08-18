@@ -106,6 +106,7 @@ fis.match('libs/**.min.js', {
             autoPack: true,
             output: 'pkg/${id}.min.js',
             jsAllInOne: false
+
         })]
     });
 

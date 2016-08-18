@@ -61,7 +61,6 @@ const getWxJsConfig = function*(ctx) {
 
 		return shaObj.getHash('HEX');
 	}
-
 	return wxJsConfig;
 }
 
@@ -75,7 +74,21 @@ const getPath = function(ctx) {
 	return 'http://' + ctx.host;
 };
 
+const minifyConfig = {
+	minifyJS: true,
+	minifyURLs: true,
+	minifyCSS: true,
+	removeAttributeQuotes: false,
+	removeComments: true,
+	sortClassName: true,
+	removeTagWhitespace: true,
+	collapseInlineTagWhitespace: true,
+	collapseWhitespace: true, //
+	preserveLineBreaks: false, //压缩成一行，需要collapseWhitespace=true时生效
+};
+
 module.exports = {
 	getPath: getPath,
-	getWxJsConfig: getWxJsConfig
+	getWxJsConfig: getWxJsConfig,
+	minifyConfig: minifyConfig
 }

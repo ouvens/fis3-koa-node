@@ -14,7 +14,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const ReactDOMServer = require('react-dom/server');
 
-
+const minify = require('html-minifier').minify;
 
 /**
  * 社团详情页
@@ -67,13 +67,14 @@ const orgRank = function*(req, res) {
 
 		// 如果是前端渲染则不渲染数据
 		if (ctx.request.query.r) {
-			ctx.body = yield render(ctx, 'pages/org-rank');
+			res = yield render(ctx, 'pages/org-rank');
 		} else {
-			ctx.body = yield render(ctx, 'pages/org-rank', {
+			res = yield render(ctx, 'pages/org-rank', {
 				data: data,
 				wxJsConfig: wxJsConfig
 			});
 		}
+		ctx.body = minify(res, config.minifyConfig);
 	} catch (e) {
 		console.log(e);
 	}
@@ -87,9 +88,11 @@ const orgRank = function*(req, res) {
  */
 const login = function*(req, res) {
 	const ctx = this;
-	ctx.body = yield render(ctx, 'pages/user-login', {
+	res = yield render(ctx, 'pages/user-login', {
 		session: ctx.session
 	});
+	// 压缩html内容
+	ctx.body = minify(res, config.minifyConfig);
 }
 
 // react测试页
