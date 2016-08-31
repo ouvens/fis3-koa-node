@@ -4,7 +4,6 @@
  */
 var $ = require('jquery');
 
-var userForm = require('react-com');
 
 var tpl = require('./index.tpl');
 var Component = require('comBase');
@@ -20,20 +19,16 @@ component.extend({
     _renderData: function() {
         this._initComponent();
         this._bindEvent();
-
     },
     _ajaxData: function() {
 
     },
 
-    _initComponent: function(data) {
-        userForm.init();
-    },
+    _initComponent: function(data) {},
 
     _bindEvent: function(data) {
 
     }
 });
-
 
 module.exports = component;

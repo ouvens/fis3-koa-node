@@ -8,6 +8,7 @@ const render = require('../lib/render');
 const util = require('../lib/util');
 const md5 = require('../lib/md5');
 const coRequest = require('../lib/coRequest');
+const reactComponent = require('../lib/reactComponent');
 const config = require('./common/config');
 
 const React = require('react');
@@ -101,13 +102,16 @@ const reactController = function*(req, res) {
 	let ctx = this;
 	let props = {
 		name: 'ouvehzhang'
-	}
-	let reactComponent = React.createFactory(require('../dev/component/react/react-com/main.jsx'));
+	};
 
-	ctx.body = yield render(ctx, 'pages/react', {
-		reactComponent: ReactDOMServer.renderToString(reactComponent(props))
-			// reactComponent: ReactDOMServer.renderToStaticMarkup(reactComponent(props))
+	let components = reactComponent.render(ctx, {
+		'react-hello': props,
+		'react-content': props
 	});
+
+	res = yield render(ctx, 'pages/react', components);
+
+	ctx.body = minify(res, config.minifyConfig);
 };
 
 
