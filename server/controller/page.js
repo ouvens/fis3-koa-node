@@ -97,7 +97,7 @@ const reactController = function*(req, res) {
 
 	let ctx = this;
 	let props = {
-		name: 'ouvehzhang'
+		name: 'ouvenzhang'
 	}
 	let reactComponent = React.createFactory(require('../dev/component/react/react-com/main.jsx'));
 
