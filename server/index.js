@@ -28,6 +28,9 @@ app.use(session({
 		ttl: 3600,
 		keySchema: 'XD:schema',
 		key: 'XD:session'
+	},
+	cookie: {
+		path: '/'
 	}
 }));
 
