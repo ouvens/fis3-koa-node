@@ -1,5 +1,10 @@
 /**
- * nodejs端web开发常见工具类
+ * filename: util.js
+ * author: ouvenzhang
+ * description: 提供常见的的工具函数集，主要包含:
+ *     getDay()：获取中文星期数
+ *     formatTime()：获取格式化后的时间
+ *     ...
  */
 
 'use strict';
@@ -52,6 +57,11 @@ function _format(format, timestamp) {
 	return format.replace(/y+/ig, year).replace(/m+/ig, month).replace(/d+/ig, date).replace(/h+/ig, hour).replace(/i+/ig, minite).replace(/s+/ig, second);
 }
 
+/**
+ * 获取星期
+ * @param  {[type]} timestamp [输入的时间戳]
+ * @return {[type]}           [返回星期中文表示]
+ */
 function _getDay(timestamp) {
 	const Day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
 	return Day[timestamp.getDay()];
