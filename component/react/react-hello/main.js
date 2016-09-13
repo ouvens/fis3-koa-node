@@ -9,8 +9,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-console.log(React, ReactDOM);
-
 module.exports = {
 	init: function() {
 		console.log('init');

@@ -54,7 +54,8 @@ fis.match('libs/**.min.js', {
     // 公共组件id匹配
     .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.js$/i, {
         isMod: true,
-        id: '$2'
+        id: '$2',
+        parser: fis.plugin('react')
     })
     // 进行前端引用输出
     // .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.rt$/i, {

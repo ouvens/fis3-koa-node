@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 
 var reactContent = React.createClass({
   	render: function() {
-    	return <div>my name is {this.props.name}</div>;
+    	return <div id="reactContent">my name is {this.props.name}</div>;
   	}
 });
 

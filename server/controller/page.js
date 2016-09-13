@@ -99,8 +99,8 @@ const reactController = function*(req, res) {
 	let props = {
 		name: 'ouvenzhang'
 	}
-	let reactComponent = React.createFactory(require('../dev/component/react/react-com/main.jsx'));
-
+	let reactComponent = React.createFactory(require('../dev/component/react/react-hello/main.jsx'));
+	
 	ctx.body = yield render(ctx, 'pages/react', {
 		reactComponent: ReactDOMServer.renderToString(reactComponent(props))
 			// reactComponent: ReactDOMServer.renderToStaticMarkup(reactComponent(props))

@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 
 var HelloMessage = React.createClass({
   	render: function() {
-    	return <div>Hello {this.props.name}</div>;
+    	return <div id="reactHello">Hello {this.props.name}</div>;
   	}
 });
 
@@ -19,4 +19,4 @@ var HelloMessage = React.createClass({
 //   </Router>
 // ), document.getElementById('root'))
 
-module.exports = HelloMessage;
+module.exports= HelloMessage;
