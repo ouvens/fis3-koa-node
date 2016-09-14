@@ -16,20 +16,29 @@ var props = {
     job: 'engineer'
 };
 
+var props2 = {
+    name: 'ouven',
+    address: 'China',
+    age: '26',
+    job: 'engineer'
+};
+
 var ReactContent = React.createClass({
 
-    sayHi: function(){
+    change: function(){
 
-        this.setState({data: this.data});
-        this.props.data.name = 'zhang';
-        console.log(obj);
+        // this.props.data.name = 'zhang';
+        // this.props.data.address = 'wuhan';
+        
+        this.props.data = props;
     },
     render: function() {
         // 不能并行写两个元素，只能放一层元素里面嵌套
         return (
             <ul>
                 <li>name: {this.props.data.name}</li>
-                <li onClick={this.sayHi}>address: {this.props.data.address}</li>
+                <li>address: {this.props.data.address}</li>
+                <button onClick={this.change}>修改</button>
             </ul>
         );
     },
