@@ -16,7 +16,7 @@ require.async(['badjs'], function(badjs) {
     });
 });
 
-require.async(['react', 'react-dom', 'jquery', './main'], function(react, reactDom, $, main) {
+require.async(['./main'], function(main) {
     main.init();
 });
 

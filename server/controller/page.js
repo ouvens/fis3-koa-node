@@ -87,9 +87,13 @@ const orgRank = function*(req, res) {
  */
 const login = function*(req, res) {
 	const ctx = this;
+
+	let isMobile = /ipad|iphone|android/i.test(ctx.header['user-agent'])
+
 	ctx.body = yield render(ctx, 'pages/user-login', {
 		session: ctx.session
 	});
+
 }
 
 // react测试页
