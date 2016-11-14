@@ -17,12 +17,26 @@ component.extend({
     },
 
     _renderData: function() {
+        this._ajaxData();
         this._initComponent();
         this._bindEvent();
 
     },
     _ajaxData: function() {
-
+        var self = this;
+        $.ajax({
+            url: '../mock/indexPage.json',
+            type: 'get',
+            dataType: 'json',
+            data: {},
+            success: function(data){
+                self._initComponent(data.result);
+                self._bindEvent();
+            },
+            error: function(msg){
+                dialog.init();
+            }
+        });
     },
 
     _initComponent: function(data) {

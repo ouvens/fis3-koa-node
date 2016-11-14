@@ -15,6 +15,43 @@ const ReactDOM = require('react-dom');
 const ReactDOMServer = require('react-dom/server');
 
 
+const index = function*(req, res) {
+
+    let ctx = this;
+
+    try {
+    	let wxJsConfig = yield config.getWxJsConfig(ctx);
+        let result = yield coRequest({
+        	url: 'http://127.0.0.1:8086/mock/indexPage.json',
+        	type: 'get'
+        });
+        let response = result;
+        console.log(response);
+        let data = JSON.parse(response.body).result;
+
+		// 如果是前端渲染则不渲染数据
+		if (ctx.request.query.r) {
+			ctx.body = yield render(ctx, 'pages/index');
+		} else {
+			ctx.body = yield render(ctx, 'pages/index', {
+	            pageMenu: data.pageMenu,
+	            keywords: data.keywords,
+	            banner2: data.banner2,
+	            banner3: data.banner3,
+	            slider: data.slider,
+	            tabRecmend: data.tabs.recmendList,
+	            tabMore: data.tabs.moreList,
+	            panel3: data.panel3,
+				wxJsConfig: wxJsConfig
+			});
+		}
+
+    } catch (e) {
+        ctx.body = 404;
+        console.log(e);
+    }
+};
+
 
 /**
  * 社团详情页
@@ -113,6 +150,7 @@ const reactController = function*(req, res) {
 
 
 module.exports = {
+	index: index,
 	orgRank: orgRank,
 	orgDetail: orgDetail,
 	login: login,

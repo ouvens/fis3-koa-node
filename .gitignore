@@ -10,6 +10,7 @@ $RECYCLE.BIN/
 node_modules
 server/dev
 server/pages
+client
 
 # Windows Installer files
 *.cab

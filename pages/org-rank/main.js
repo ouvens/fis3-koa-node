@@ -2,7 +2,7 @@
  * main
  * @require './index.scss' // 无需在页面中控制 css
  */
-var $ = require('jquery');
+
 var localAjax = require('localAjax');
 var util = require('util');
 var wxshare = require('share');

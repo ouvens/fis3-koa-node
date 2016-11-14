@@ -9,7 +9,9 @@ const page = require('../controller/page');
 const router = require('koa-router')();
 
 // 默认跳转登录页或404页面
-router.get('/*', page.login); //用户登陆页
+router.get('/login.html', page.login); //用户登陆页
+
+router.get('/index.html', page.index);
 
 // 同构样例地址，使用r=1区分前后台渲染
 router.get('/org_rank.html', page.orgRank);

@@ -15,7 +15,7 @@ var Component = require('comBase');
 var component = new Component($('body'), tpl);
 
 // window.r 用于判断是否使用浏览器端拉数据渲染，有r且含有值则使用浏览器端渲染
-window.r = util.url.getUrlParam('r');
+window.r = util.url.getUrlParam('r') || 1;
 
 component.extend({
 
@@ -34,16 +34,16 @@ component.extend({
 
     _ajaxData: function() {
         var self = this;
-        $.localAjax({
+        $.ajax({
             url: '../mock/star.json',
             method: 'get',
             dataType: 'json',
             data: {},
-            done: function(data) {
+            success: function(data) {
                 self._initComponent(data.result);
                 self._bindEvent(data.result);
             },
-            fail: function(msg) {
+            error: function(msg) {
                 dialog.init();
             }
         });

@@ -1,0 +1,13 @@
+
+<script>
+
+window.onerror = function(a, b ,c){
+    alert(a + b +c);
+}
+
+require.async(['zepto', 'frozen', './main'], function($, frozen, main) {
+    main.init();
+});
+
+</script>
+
