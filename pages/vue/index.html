@@ -1,0 +1,44 @@
+<div id="demo">
+  <group>
+    <cell title="vue" value="cool"></cell>
+  </group>
+</div>
+	
+<tab id="tabs">
+    <tab-item :selected="demo1 === '已发货'" @click="demo1 = '已发货'">已发货</tab-item>
+    <tab-item :selected="demo1 === '未发货'" @click="demo1 = '未发货'">未发货</tab-item>
+    <tab-item :selected="demo1 === '全部订单'" @click="demo1 = '全部订单'">全部订单</tab-item>
+</tab>
+
+<a id="test" v-html="text" :href="href"></a>
+
+<script>
+require.async(['vuejs2'], function(Vue) {
+
+    Vue.component('group', vuxGroup);
+    Vue.component('cell', vuxCell);
+
+    new Vue({
+        el: '#demo',
+        data: {
+            demo1: '未发货'
+        }
+    });
+
+    new Vue({
+        el: '#tabs',
+        data: {
+            demo1: '未发货'
+        }
+    });
+
+    new Vue({
+        el: '#test',
+        data: {
+            text: '未发货',
+            href: 'http://www.baidu.com'
+        }
+    });
+
+});
+</script>
