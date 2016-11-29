@@ -11,7 +11,7 @@ node_modules
 server/dev
 server/pages
 client
-dev/
+dev
 
 # Windows Installer files
 *.cab
