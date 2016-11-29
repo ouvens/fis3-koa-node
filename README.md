@@ -79,5 +79,8 @@ npm start
 `pm2 start pm2.json`
 
 
+#### 6、前端使用vux
+
+
 
 

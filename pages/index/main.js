@@ -61,13 +61,13 @@ var page = {
 
     _initComponent: function(data) {
 
-        // searchBar.init(data.keywords);
-        // pageMenu.init(data.pageMenu);
-        // banner2.init(data.banner2);
-        // slider.init(data.slider);
-        // banner3.init(data.banner3);
-        // tab.init(data.tabs);
-        // panel3.init(data.panel3);
+        searchBar.init(data.keywords);
+        pageMenu.init(data.pageMenu);
+        banner2.init(data.banner2);
+        slider.init(data.slider);
+        banner3.init(data.banner3);
+        tab.init(data.tabs);
+        panel3.init(data.panel3);
 
     },
 
