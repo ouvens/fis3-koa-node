@@ -1,16 +1,0 @@
-/* /component/react/react-hello/index.scss */* {
-  color: red; }
-/* /component/react/react-content/index.scss */* {
-  color: red; }
-/* /pages/react/index.scss */body {
-  margin: 0;
-  padding: 0;
-  min-width: 980px;
-  box-sizing: border-box;
-  padding-bottom: 40px;
-  background-color: #f0f0f0;
-  font-family: 'Microsoft YaHei';
-  color: red; }
-  body h3 {
-    font-weight: 400; }
-
