@@ -213,7 +213,8 @@ return id.replace(/\.js$/i, '');
 require.timeout = 5000;
 })(this);</script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script>require.resourceMap({"res":{"badjs":{"pkg":"p0","deps":["badjs-report"]},"badjs-report":{"pkg":"p0"},"zepto":{"pkg":"p1"},"pages/org-rank/main.js":{"pkg":"p2","deps":["localAjax","util","share","scrollload","rank-header","rank-top","rank-normal","org-rank/index.tpl","comBase"]},"localAjax":{"pkg":"p2","deps":["zepto","localStorage","md5"]},"util":{"pkg":"p2"},"share":{"pkg":"p2"},"scrollload":{"pkg":"p2","deps":["zepto"]},"rank-header":{"pkg":"p2","deps":["comBase","rank-header/index.tpl"]},"rank-top":{"pkg":"p2","deps":["comBase","rank-top/index.tpl"]},"rank-normal":{"pkg":"p2","deps":["comBase","scrollload","rank-normal/index.tpl"]},"org-rank/index.tpl":{"pkg":"p2"},"comBase":{"pkg":"p2"},"localStorage":{"pkg":"p2","deps":["zepto"]},"md5":{"pkg":"p2","deps":["zepto"]},"rank-header/index.tpl":{"pkg":"p2"},"rank-top/index.tpl":{"pkg":"p2"},"rank-normal/index.tpl":{"pkg":"p2"}},"pkg":{"p0":{"url":"/pkg/badjs.min.js"},"p1":{"url":"/pkg/zepto.min.js"},"p2":{"url":"/pkg/pages/org-rank/main.js.min.js"}}});</script><section class="ui-rank-header" id="rankHeader">
+<script>require.resourceMap({"res":{"badjs":{"pkg":"p0","deps":["badjs-report"]},"badjs-report":{"pkg":"p0"},"zepto":{"pkg":"p1"},"pages/org-rank/main.js":{"pkg":"p2","deps":["localAjax","util","share","scrollload","rank-header","rank-top","rank-normal","org-rank/index.tpl","comBase"]},"localAjax":{"pkg":"p2","deps":["zepto","localStorage","md5"]},"util":{"pkg":"p2"},"share":{"pkg":"p2"},"scrollload":{"pkg":"p2","deps":["zepto"]},"rank-header":{"pkg":"p2","deps":["comBase","rank-header/index.tpl"]},"rank-top":{"pkg":"p2","deps":["comBase","rank-top/index.tpl"]},"rank-normal":{"pkg":"p2","deps":["comBase","scrollload","rank-normal/index.tpl"]},"org-rank/index.tpl":{"pkg":"p2"},"comBase":{"pkg":"p2"},"localStorage":{"pkg":"p2","deps":["zepto"]},"md5":{"pkg":"p2","deps":["zepto"]},"rank-header/index.tpl":{"pkg":"p2"},"rank-top/index.tpl":{"pkg":"p2"},"rank-normal/index.tpl":{"pkg":"p2"}},"pkg":{"p0":{"url":"/pkg/badjs.min.js"},"p1":{"url":"/pkg/zepto.min.js"},"p2":{"url":"/pkg/pages/org-rank/main.js.min.js"}}});</script>
+<section class="ui-rank-header" id="rankHeader">
 <div class="ui-placehold-img">
 <span style="background-image:url({{ data.banner }})"></span>
 </div>
@@ -221,7 +222,8 @@ require.timeout = 5000;
 <p class="ui-txt-white ui-txt-left">{{ data.date }}</p>
 <p class="ui-txt-white ui-txt-right">{{ data.title }}</p>
 </div>
-</section><ul class="ui-rank-top border-list ui-rank" id="rankTop">
+</section>
+<ul class="ui-rank-top border-list ui-rank" id="rankTop">
 {% for item in data.rankList %}
 {% if loop.index < 4 %}
 <li class="rank-top-list ui-border-b {% if loop.index === 1 %}top-first{% endif %}">
@@ -235,7 +237,8 @@ require.timeout = 5000;
 </li>
 {% endif %}
 {% endfor %}
-</ul><ul class="ui-list ui-rank" id="rankNormal">
+</ul>
+<ul class="ui-list ui-rank" id="rankNormal">
 {% for item in data.rankList %}
 {% if loop.index > 3 %}
 <li class="ui-border-t ui-list-item">
@@ -268,5 +271,5 @@ require.async(['zepto','pages/org-rank/main'], function($, main) {
 main.init();
 });
 </script>
-<script type="text/javascript" charset="utf-8" src="http://192.168.95.1:8132/livereload.js"></script></body>
+</body>
 </html>
