@@ -8,6 +8,7 @@
     "fis3-parser-babel": "^1.2.4",
     "fis3-parser-node-sass": "0.0.1",
     "fis3-parser-swig": "0.0.4",
-    "fis3-parser-vue-component": "^4.0.3"
+    "fis3-parser-vue-component": "^4.0.3",
+    "node-sass": "^3.3.2"
   }
 }
