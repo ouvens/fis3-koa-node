@@ -34,7 +34,7 @@
 <script>
 import Base from '../../libs/base'
 import Icon from '../icon'
-import InlineDesc from '../inline-desc'
+import InlineDesc from 'inline-desc'
 
 import isEmail from 'validator/lib/isEmail'
 import isMobilePhone from 'validator/lib/isMobilePhone'
