@@ -1,22 +1,24 @@
+<a id="test" v-html="text" :href="href"></a>
+
 <div id="demo">
   <group>
     <cell title="vue" value="cool"></cell>
   </group>
 </div>
-	
-<tab id="tabs">
-    <tab-item :selected="demo1 === '已发货'" @click="demo1 = '已发货'">已发货</tab-item>
-    <tab-item :selected="demo1 === '未发货'" @click="demo1 = '未发货'">未发货</tab-item>
-    <tab-item :selected="demo1 === '全部订单'" @click="demo1 = '全部订单'">全部订单</tab-item>
-</tab>
 
-<a id="test" v-html="text" :href="href"></a>
+
+<p style="padding:15px;" id="time">
+  <span>距离2017-04-01还有</span>
+  <clocker time="2017-04-01"></clocker>
+</p>
 
 <script>
-require.async(['vuejs2'], function(Vue) {
+
+require.async(['vuejs2', 'group', 'cell', 'clocker'], function(Vue, vuxGroup,  vuxCell, vuxClocker) {
 
     Vue.component('group', vuxGroup);
     Vue.component('cell', vuxCell);
+    Vue.component('clocker', vuxClocker);
 
     new Vue({
         el: '#demo',
@@ -26,11 +28,19 @@ require.async(['vuejs2'], function(Vue) {
     });
 
     new Vue({
-        el: '#tabs',
+        el: '#demo',
         data: {
             demo1: '未发货'
         }
     });
+
+    // new Vue({
+    //     el: '#tabs',
+    //     data: {
+    //       demo2: '美食',
+    //       list2: ['精选', '美食', '电影', '酒店', '外卖']
+    //     }
+    // });
 
     new Vue({
         el: '#test',

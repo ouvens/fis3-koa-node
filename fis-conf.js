@@ -20,10 +20,13 @@ var appDist = './client/www';
 fis.set('project.md5Connector', '-');
 fis.hook('commonjs');
 
-fis.config.set('project.fileType.text', 'jsx'); //*.jsx files are text file. 
-fis.config.set('modules.parser.jsx', 'react'); //compile *.jsx with fis-parser-react plugin 
-fis.config.set('roadmap.ext.jsx', 'jsx'); //*.jsx are exactly treat as *.js 
-
+// fis.config.set('project.fileType.text', 'jsx'); //*.jsx files are text file. 
+// fis.config.set('modules.parser.jsx', 'react'); //compile *.jsx with fis-parser-react plugin 
+// fis.config.set('roadmap.ext.jsx', 'jsx'); //*.jsx are exactly treat as *.js
+// fis.hook('relative');
+// fis.match('**', {
+// 		relative: true
+// 	})
 /**
  * 配置进行处理的目录或文件
  */
@@ -62,15 +65,12 @@ fis.match('libs/**.min.js', {
 		packTo: '/libs/$1.js',
 		isMod: false
 	})
-	.match(/^\/(component|asyncComponent)\/(.+)\/main\.js$/i, {
-		isMod: true,
-		id: '$2'
-	})
 	// 公共组件id匹配
+	// parser: fis.plugin('babel')
 	.match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.js$/i, {
 		isMod: true,
 		id: '$2',
-		parser: fis.plugin('react')
+		parser: fis.plugin('babel')
 	})
 	// 进行前端引用输出
 	// .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.rt$/i, {
@@ -81,27 +81,34 @@ fis.match('libs/**.min.js', {
 	//     release: '$1/$2.rt', // 发布的后的文件名，避免和同目录下的 js 冲突
 	//     parser: fis.plugin('react')
 	// })
-
-// 进行服务端目录下输出内容
-
-.match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.jsx$/i, {
+	// 进行服务端目录下输出内容
+	.match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.jsx$/i, {
 		rExt: 'jsx',
 		isMod: false,
 		id: '$1',
 		parser: fis.plugin('react')
 	})
 	// 进行服务端目录下输出内容
-	// vue组件本身配置
-	.match(/^\/(component|asyncComponent)\/.+\/(.+)\/index\.js$/, {
+	.match(/^\/(component|asyncComponent)\/vue\/(.+)\/index\.(vue|js)$/, {
+		rExt: 'js',
+		// relative: true,
+		isMod: true,
+		packTo: '/component/vue/$2.js',
+		id: '$2',
+		parser: [fis.plugin('vue-component', {
+			cssScopeFlag: 'vuec'
+		}), fis.plugin('babel')]
+	})
+	.match(/^\/(component|asyncComponent)\/(libs|directives|filters|mixins|plugins)\/(.+)\.js$/, {
 		rExt: 'js',
 		isMod: true,
+		packTo: '/component/vue/$2.js',
 		id: '$2',
-		parser: fis.plugin('vue-component', {
-			cssScopeFlag: 'vuec'
-		})
+		parser: [fis.plugin('babel')]
 	})
 	.match('pages/**.js', {
-		isMod: true
+		isMod: true,
+		packTo: '$0'
 	})
 	.match('**.{scss,sass}', {
 		parser: fis.plugin('node-sass', {
@@ -132,7 +139,9 @@ fis.match('libs/**.min.js', {
 		packager: [fis.plugin('smart', {
 			autoPack: true,
 			output: 'pkg/${id}.min.js',
-			jsAllInOne: false
+			jsAllInOne: false,
+			// 不打包的模块
+			ignore: []
 		})]
 	});
 
@@ -236,6 +245,13 @@ fis.media('dev')
 		})
 	})
 	.match('/{pkg,libs,component,asyncComponent}/**.js', {
+		// parser: fis.plugin('babel'),
+		deploy: fis.plugin('local-deliver', {
+			to: devDist
+		})
+	})
+	.match('/component/vue/**.{vue,js}', {
+		// parser: fis.plugin('babel'),
 		deploy: fis.plugin('local-deliver', {
 			to: devDist
 		})

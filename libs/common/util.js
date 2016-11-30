@@ -2,7 +2,7 @@
  * nodejs端web开发常见工具类
  */
 
-'use strict';
+
 
 var emptyObject = {};
 var noop = function() {};
@@ -154,5 +154,6 @@ function removeFromArray(item, array) {
 	}
 	return array;
 }
+
 
 module.exports = util;

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import InlineDesc from '../inline-desc'
+import InlineDesc from 'inline-desc'
 import { go } from '../../libs/router'
 
 export default {

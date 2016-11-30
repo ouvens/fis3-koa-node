@@ -11,7 +11,7 @@
 <script>
 import Picker from './datetimepicker'
 import Group from '../group'
-import InlineDesc from '../inline-desc'
+import InlineDesc from 'inline-desc'
 import Base from '../../libs/base'
 
 export default {
