@@ -7,19 +7,22 @@ var ReactContent = React.createClass({
 
     change: function(){
 
-        console.log(this.props)
+        console.log(this.props);
         this.ajaxData();
     },
 
     render: function() {
         // 不能并行写两个元素，只能放一层元素里面嵌套
         return (
+            <div>
+            <div onClick={this.change} data-attr="哈哈">后端输出内容：my name is {this.props.data.name}</div>
             <ul>
                 <li>name: {this.props.data.name}</li>
                 <li>address: {this.props.data.address}</li>
                 <li>job: {this.props.data.job}</li>
                 <button onClick={this.change}>修改</button>
             </ul>
+            </div>
         );
     },
 
