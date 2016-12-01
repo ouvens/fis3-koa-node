@@ -9,7 +9,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-
 var state1 = {
     name: 'ouvenzhang',
     address: 'China',
@@ -71,6 +70,11 @@ ReactDOM.render(
 
 module.exports = {
 	init: function() {
-		console.log('init');
+        // 自定义的React类必须使用首字母大写方式命名
+        ReactDOM.render(
+            <ReactContent/>,
+            // <ReactContent url="/api/comments" /> // 从服务端获取数据
+            document.getElementById('testHello')
+        );
 	}
 };

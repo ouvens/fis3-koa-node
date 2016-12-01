@@ -3,37 +3,29 @@
  * @require './index.scss' // 无需在页面中控制 css
  */
 
-// var $ = require('jquery');
-
-var tpl = require('./index.tpl');
-var Component = require('comBase');
 
 var reactContent = require('react-content');
 var reactHello = require('react-hello');
 
-var component = new Component($('body'), tpl);
-
-component.extend({
+var exports = {
 
     init: function() {
-        this._renderData();
-    },
-
-    _renderData: function() {
         this._initComponent();
         this._bindEvent();
     },
+
     _ajaxData: function() {
 
     },
 
-    _initComponent: function(data) {
+    _initComponent: function() {
         reactContent.init();
+        reactHello.init();
     },
 
-    _bindEvent: function(data) {
+    _bindEvent: function() {
 
     }
-});
+};
 
-module.exports = component;
+module.exports = exports;

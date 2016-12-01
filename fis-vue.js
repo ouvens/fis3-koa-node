@@ -72,12 +72,39 @@ fis.match('libs/**.min.js', {
 		id: '$2',
 		parser: fis.plugin('babel')
 	})
+	// 进行前端引用输出
+	// .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.rt$/i, {
+	//     isMod: true,
+	//     rExt: 'js',
+	//     id: '$1/$2.rt',
+	//     moduleId: '$1/$2.rt',
+	//     release: '$1/$2.rt', // 发布的后的文件名，避免和同目录下的 js 冲突
+	//     parser: fis.plugin('react')
+	// })
 	// 进行服务端目录下输出内容
 	.match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.jsx$/i, {
 		rExt: 'jsx',
 		isMod: false,
 		id: '$1',
 		parser: fis.plugin('react')
+	})
+	// 进行服务端目录下输出内容
+	.match(/^\/(component|asyncComponent)\/vue\/(.+)\/index\.(vue|js)$/, {
+		rExt: 'js',
+		// relative: true,
+		isMod: true,
+		packTo: '/component/vue/$2.js',
+		id: '$2',
+		parser: [fis.plugin('vue-component', {
+			cssScopeFlag: 'vuec'
+		}), fis.plugin('babel')]
+	})
+	.match(/^\/(component|asyncComponent)\/(libs|directives|filters|mixins|plugins)\/(.+)\.js$/, {
+		rExt: 'js',
+		isMod: true,
+		packTo: '/component/vue/$2.js',
+		id: '$2',
+		parser: [fis.plugin('babel')]
 	})
 	.match('pages/**.js', {
 		isMod: true,
@@ -127,7 +154,7 @@ fis.media('server')
 			to: serverDev
 		})
 	})
-	.match('/{pkg,libs,asyncComponent}/**.js', {
+	.match('/{pkg,libs,component,asyncComponent}/**.js', {
 		deploy: fis.plugin('local-deliver', {
 			to: serverDev
 		})
@@ -168,7 +195,7 @@ fis.media('deploy')
 			to: serverDist
 		})
 	})
-	.match('/{pkg,libs,asyncComponent}/**.js', {
+	.match('/{pkg,libs,component,asyncComponent}/**.js', {
 		// parser: fis.plugin('babel'),
 		useHash: true,
 		optimizer: fis.plugin('uglify-js'),
@@ -218,6 +245,12 @@ fis.media('dev')
 		})
 	})
 	.match('/{pkg,libs,component,asyncComponent}/**.js', {
+		// parser: fis.plugin('babel'),
+		deploy: fis.plugin('local-deliver', {
+			to: devDist
+		})
+	})
+	.match('/component/vue/**.{vue,js}', {
 		// parser: fis.plugin('babel'),
 		deploy: fis.plugin('local-deliver', {
 			to: devDist

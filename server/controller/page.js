@@ -15,6 +15,25 @@ const ReactDOM = require('react-dom');
 const ReactDOMServer = require('react-dom/server');
 
 
+// react测试页
+const reactController = function*(req, res) {
+
+	let ctx = this;
+	let props = {
+		name: 'ouvenzhang'
+	}
+	let reactHello = React.createFactory(require('../dev/component/react/react-hello/main.jsx'));
+
+	let reactContent = React.createFactory(require('../dev/component/react/react-content/main.jsx'));
+		
+	// console.log(ReactDOMServer.renderToString(reactComponent(props)));
+
+	ctx.body = yield render(ctx, 'pages/react', {
+		reactHello: ReactDOMServer.renderToString(reactHello(props)),
+		reactContent: ReactDOMServer.renderToStaticMarkup(reactContent(props))
+	});
+};
+
 const index = function*(req, res) {
 
     let ctx = this;
@@ -133,20 +152,6 @@ const login = function*(req, res) {
 
 }
 
-// react测试页
-const reactController = function*(req, res) {
-
-	let ctx = this;
-	let props = {
-		name: 'ouvenzhang'
-	}
-	let reactComponent = React.createFactory(require('../dev/component/react/react-hello/main.jsx'));
-	
-	ctx.body = yield render(ctx, 'pages/react', {
-		reactComponent: ReactDOMServer.renderToString(reactComponent(props))
-			// reactComponent: ReactDOMServer.renderToStaticMarkup(reactComponent(props))
-	});
-};
 
 
 module.exports = {

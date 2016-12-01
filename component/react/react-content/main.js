@@ -16,13 +16,6 @@ var props = {
     job: 'engineer'
 };
 
-var props2 = {
-    name: 'ouven',
-    address: 'China',
-    age: '26',
-    job: 'engineer'
-};
-
 var ReactContent = React.createClass({
 
     change: function(){
@@ -30,6 +23,7 @@ var ReactContent = React.createClass({
         // this.props.data.name = 'zhang';
         // this.props.data.address = 'wuhan';
         
+        alert()
         this.props.data = props;
     },
     render: function() {
