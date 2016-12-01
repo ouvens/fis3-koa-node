@@ -128,6 +128,7 @@ fis.media('server')
 		})
 	})
 	.match('/{pkg,libs,asyncComponent}/**.js', {
+		optimizer: fis.plugin('uglify-js'),
 		deploy: fis.plugin('local-deliver', {
 			to: serverDev
 		})
