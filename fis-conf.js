@@ -52,7 +52,7 @@ fis.match('libs/**.min.js', {
 		isMod: true,
 		rExt: 'js',
 		id: '$1/$2.tpl',
-		release: '$1/$2.tpl', // 发布的后的文件名，避免和同目录下的 js 冲突
+		// release: '$1/$2.tpl', // 发布的后的文件名，避免和同目录下的 js 冲突
 		moduleId: '$1/$2.tpl',
 		parser: fis.plugin('swig')
 	})
@@ -70,25 +70,29 @@ fis.match('libs/**.min.js', {
 	.match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.js$/i, {
 		isMod: true,
 		id: '$2',
-		parser: fis.plugin('babel')
+		parser: fis.plugin('babel'),
+		optimizer: fis.plugin('uglify-js')
 	})
-	// 进行服务端目录下输出内容
+	// page级别内容压缩
+	.match('pages/**.js', {
+		isMod: true,
+		packTo: '$0',
+		optimizer: fis.plugin('uglify-js')
+	})
+	// 进行服务端目录下react模板静态输出内容
 	.match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.jsx$/i, {
 		rExt: 'jsx',
 		isMod: false,
 		id: '$1',
 		parser: fis.plugin('react')
 	})
-	.match('pages/**.js', {
-		isMod: true,
-		packTo: '$0'
-	})
 	.match('**.{scss,sass}', {
+		rExt: '.css',
 		parser: fis.plugin('node-sass', {
 			include_paths: ['libs', 'pages']
-		}),
-		rExt: '.css'
+		})
 	})
+	// 异步CSS处理
 	.match(/\/(.+\.async)\.(scss|css)$/, { // 异步 css 包裹
 		isMod: false,
 		rExt: 'js',
@@ -128,7 +132,7 @@ fis.media('server')
 		})
 	})
 	.match('/{pkg,libs,asyncComponent}/**.js', {
-		optimizer: fis.plugin('uglify-js'),
+		// optimizer: fis.plugin('uglify-js'),
 		deploy: fis.plugin('local-deliver', {
 			to: serverDev
 		})
@@ -138,7 +142,7 @@ fis.media('server')
 			to: serverDev
 		})
 	})
-	.match('/pkg/pages/*/**.{css,scss,sass}', {
+	.match('**.{css,scss,sass}', {
 		optimizer: fis.plugin('clean-css'),
 		deploy: fis.plugin('local-deliver', {
 			to: serverDev
@@ -170,7 +174,7 @@ fis.media('deploy')
 		})
 	})
 	.match('/{pkg,libs,asyncComponent}/**.js', {
-		// parser: fis.plugin('babel'),
+		parser: fis.plugin('babel'),
 		useHash: true,
 		optimizer: fis.plugin('uglify-js'),
 		deploy: fis.plugin('local-deliver', {

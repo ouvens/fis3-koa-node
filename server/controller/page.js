@@ -13,20 +13,24 @@ const config = require('./common/config');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const ReactDOMServer = require('react-dom/server');
+const htmlMinify = require('html-minifier').minify;
 
-
-// react测试页
+/**
+ * react前后端同构页面
+ * @param {[type]} req           [description]
+ * @param {[type]} res           [description]
+ * @yield {[type]} [description]
+ */
 const reactController = function*(req, res) {
 
 	let ctx = this;
 	let props = {
 		name: 'ouvenzhang'
 	}
+
 	let reactHello = React.createFactory(require('../dev/component/react/react-hello/main.jsx'));
 
 	let reactContent = React.createFactory(require('../dev/component/react/react-content/main.jsx'));
-		
-	// console.log(ReactDOMServer.renderToString(reactComponent(props)));
 
 	ctx.body = yield render(ctx, 'pages/react', {
 		reactHello: ReactDOMServer.renderToString(reactHello(props)),

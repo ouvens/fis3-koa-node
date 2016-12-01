@@ -1,37 +1,20 @@
 'use strict';
-/**
- * 可以使用extends方法覆盖下列方法
- * init(data) // 初始化方法
- * _renderData(data) // 渲染数据方法
- * _bindEvent() //事件绑定
- */
 
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var state1 = {
-    name: 'ouvenzhang',
-    address: 'China',
-    age: '26',
-    job: 'engineer'
-};
-
-var state2 = {
-    name: 'ouven',
-    address: 'shenzhen',
-    age: '26',
-    job: 'engineer'
-};
-
 var ReactContent = React.createClass({
+
+    /**
+     * props用于组件接受外部参数, 需要设置给state
+     * @return {[type]} [description]
+     */
     getInitialState: function() {
-        return {
-            data: state1
-        };
+        return this.props;
     },
 
     change: function(){
-        this.setState({data: state2});
+        this.setState({data: this.props.data1});
     },
     
     render: function() {
@@ -60,20 +43,26 @@ var ReactContent = React.createClass({
     }
 });
 
-
-// 自定义的React类必须使用首字母大写方式命名
-ReactDOM.render(
-    <ReactContent/>,
-    // <ReactContent url="/api/comments" /> // 从服务端获取数据
-    document.getElementById('testHello')
-);
-
 module.exports = {
 	init: function() {
         // 自定义的React类必须使用首字母大写方式命名
+        var data = {
+            name: 'XXouvenzhang',
+            address: 'XXChina',
+            age: '26',
+            job: 'XXengineer'
+        };
+
+        var data1 = {
+            name: '修改',
+            address: '修改shenzhen',
+            age: '修改26',
+            job: '修改engineer'
+        };
+
         ReactDOM.render(
-            <ReactContent/>,
             // <ReactContent url="/api/comments" /> // 从服务端获取数据
+            <ReactContent data={data} data1={data1}/>,
             document.getElementById('testHello')
         );
 	}

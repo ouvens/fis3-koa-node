@@ -21,6 +21,7 @@
     "co-monk": "~1.0.0",
     "co-request": "^1.0.0",
     "co-views": "~0.2.0",
+    "html-minifier": "^3.2.3",
     "jssha": "^2.1.0",
     "koa": "^1.2.0",
     "koa-body": "^1.4.0",
