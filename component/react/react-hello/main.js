@@ -9,8 +9,8 @@ var ReactContent = React.createClass({
      * @return {[type]} [description]
      */
     getInitialState: function() {
-        console.log(this.props);
-        return this.props;
+        var data = this.props.store.getState();
+        return { data: data['hello'] };
     },
 
     /**
@@ -19,9 +19,10 @@ var ReactContent = React.createClass({
      * @return {[type]} [description]
      */
     componentDidMount: function() {
+        var self = this;
         $.get(this.props.getUrl, function(result) {
             var lastGist = result[0];
-            console.log(result);
+            // console.log(result);
             // if (this.isMounted()) {
             // this.setState({
             //   username: lastGist.owner.login,
@@ -29,22 +30,34 @@ var ReactContent = React.createClass({
             // });
             // }
         }.bind(this));
+
+        var store = this.props.store;
+
+        function handleChange() {
+            self.setState({ data: store.getState()['hello'] });
+        }
+
+        let unsubscribe = store.subscribe(handleChange);
+        // unsubscribe();
     },
 
-
-    change: function(){
-        this.setState({data: this.props.data1});
+    change: function() {
+        var hello = this.props.store.getState()['hello'];
+        
+        hello.name = 'ouven';
+        hello.address = 'ouven-address';
+        this.props.store.dispatch({
+            type: 'hello',
+            data: hello
+        });
+        this.setState({ data: this.props.store.getState()['hello'] });
     },
-    
+
     render: function() {
         // 不能并行写两个元素，只能放一层元素里面嵌套
-        return (
-            <ul>
-                <li>name: {this.state.data.name}</li>
-                <li>address: {this.state.data.address}</li>
-                <button onClick={this.change}>按钮</button>
-            </ul>
-        );
+        return (<ul>
+            <li> name: { this.state.data.name } </li> <li> address: { this.state.data.address } </li > <button onClick={ this.change }> 按钮 </button> 
+        </ul>);
     },
 
     ajaxData: function() {
@@ -63,26 +76,12 @@ var ReactContent = React.createClass({
 });
 
 module.exports = {
-	init: function() {
-        // 自定义的React类必须使用首字母大写方式命名
-        var data = {
-            name: 'XXouvenzhang',
-            address: 'XXChina',
-            age: '26',
-            job: 'XXengineer'
-        };
-
-        var data1 = {
-            name: '修改',
-            address: '修改shenzhen',
-            age: '修改26',
-            job: '修改engineer'
-        };
-
+    // 所有组件init接受store
+    init: function(store) {
         ReactDOM.render(
             // <ReactContent url="/api/comments" /> // 从服务端获取数据
-            <ReactContent data={data} data1={data1} getUrl="http://127.0.0.1:8086/org_rank.html"/>,
+            <ReactContent store={ store } getUrl = "http://127.0.0.1:8086/org_rank.html" /> ,
             document.getElementById('testHello')
         );
-	}
+    }
 };

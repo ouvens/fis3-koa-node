@@ -8,7 +8,8 @@
  * 前端发布： fis3 release dist
  * 后端调试： fis3 release server -wL
  * 后端发布： fis3 release deploy
- * app发布：  fis3 release app
+ * app: 	  fis3 release app
+ * app发布：  fis3 release publish
  */
 
 var devDist = './dev';
@@ -23,10 +24,7 @@ fis.hook('commonjs');
 fis.config.set('project.fileType.text', 'jsx'); //*.jsx files are text file. 
 fis.config.set('modules.parser.jsx', 'react'); //compile *.jsx with fis-parser-react plugin 
 fis.config.set('roadmap.ext.jsx', 'jsx'); //*.jsx are exactly treat as *.js
-// fis.hook('relative');
-// fis.match('**', {
-// 		relative: true
-// 	})
+
 /**
  * 配置进行处理的目录或文件
  */
@@ -65,7 +63,7 @@ fis.match('libs/**.min.js', {
 		packTo: '/libs/$1.js',
 		isMod: false
 	})
-	// 公共组件id匹配
+	// 公共组件id匹配, component级别内容压缩并转es6
 	// parser: fis.plugin('babel')
 	.match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.js$/i, {
 		isMod: true,
@@ -73,10 +71,11 @@ fis.match('libs/**.min.js', {
 		parser: fis.plugin('babel'),
 		optimizer: fis.plugin('uglify-js')
 	})
-	// page级别内容压缩
+	// page级别内容压缩并转es6
 	.match('pages/**.js', {
 		isMod: true,
 		packTo: '$0',
+		parser: fis.plugin('babel'),
 		optimizer: fis.plugin('uglify-js')
 	})
 	// 进行服务端目录下react模板静态输出内容

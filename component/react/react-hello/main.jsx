@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 
 var HelloMessage = React.createClass({
   	render: function() {
-    	return <div id="reactHello">后端输出内容：Hello {this.props.name}</div>;
+    	return <div id="reactHello">hello组件：Hello {this.props.name}</div>;
   	}
 });
 
