@@ -55,9 +55,9 @@ var ReactContent = React.createClass({
 
     render: function() {
         // 不能并行写两个元素，只能放一层元素里面嵌套
-        return (<ul>
-            <li> name: { this.state.data.name } </li> <li> address: { this.state.data.address } </li > <button onClick={ this.change }> 按钮 </button> 
-        </ul>);
+        return (<div><ul>
+            <li> name: { this.state.data.name } </li> <li> address: { this.state.data.address } </li>  
+        </ul><button onClick={ this.change }> 按钮 </button></div>);
     },
 
     ajaxData: function() {

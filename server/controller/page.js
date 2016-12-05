@@ -25,16 +25,22 @@ const reactController = function*(req, res) {
 
 	let ctx = this;
 	let props = {
-		name: 'ouvenzhang'
-	}
+        type: 'hello',
+        data: { 
+            name: 'hello-name-init',
+            address: 'hello-address-init',
+            age: '26',
+            job: 'hello-job-init'
+        }
+    };
 
 	let reactHello = React.createFactory(require('../dev/component/react/react-hello/main.jsx'));
 
 	let reactContent = React.createFactory(require('../dev/component/react/react-content/main.jsx'));
 
 	ctx.body = yield render(ctx, 'pages/react', {
-		reactHello: ReactDOMServer.renderToString(reactHello(props)),
-		reactContent: ReactDOMServer.renderToStaticMarkup(reactContent(props))
+		reactHello: ReactDOMServer.renderToString(reactHello(props)), // renderToString会避免前端重渲染
+		reactContent: ReactDOMServer.renderToString(reactContent(props)) // renderToStaticMarkup不会避免前端重渲染
 	});
 };
 
