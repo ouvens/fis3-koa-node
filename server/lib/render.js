@@ -38,7 +38,9 @@ const render = function *(ctx, path, data) {
 			html: 'swig'
 		}
 	})(path, data);
-	return htmlMinify(html, minifyConfig);
+	console.log(html);
+	return html;
+	// return htmlMinify(html, minifyConfig);
 }
 
 module.exports = render;

@@ -5,7 +5,8 @@
     "fis-parser-imweb-tplv2": "0.0.3",
     "fis-parser-react": "^0.13.3",
     "fis3-hook-relative": "^1.0.9",
-		"fis3-parser-node-sass": "^0.1.9",
-		"fis3-parser-swig": "0.0.7"
-	}
+    "fis3-parser-node-sass": "^0.1.9",
+    "fis3-parser-swig": "0.0.7",
+    "html-minifier": "^3.2.3"
+  }
 }

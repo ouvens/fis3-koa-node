@@ -38,6 +38,8 @@ const reactController = function*(req, res) {
 
 	let reactContent = React.createFactory(require('../dev/component/react/react-content/main.jsx'));
 
+    var str = ReactDOMServer.renderToString(reactHello(props));
+
 	ctx.body = yield render(ctx, 'pages/react', {
 		reactHello: ReactDOMServer.renderToString(reactHello(props)), // renderToString会避免前端重渲染
 		reactContent: ReactDOMServer.renderToString(reactContent(props)) // renderToStaticMarkup不会避免前端重渲染
