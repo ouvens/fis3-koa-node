@@ -73,6 +73,10 @@ var HelloMessage = React.createClass({
     //     let unsubscribe = store.subscribe(handleChange);
     //     // unsubscribe();
     // },
+    // 
+    change: function () {
+    	// body...
+    }
 
     render: function() {
         // 不能并行写两个元素，只能放一层元素里面嵌套
