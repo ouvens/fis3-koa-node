@@ -2,8 +2,27 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var reactContent = React.createClass({
+    /**
+     * props用于组件接受外部参数, 需要设置给state
+     * @return {[type]} [description]
+     */
+    getInitialState: function() {
+    	console.log(this.props.data);
+    	var data = this.props.data;
+        return { data: data };
+    },
   	render: function() {
-    	return <div id="reactContent">content组件：{this.props.name}</div>;
+        return (
+            <div>
+            <div onClick={this.change}>content组件：{this.state.data.name}</div>
+            <ul>
+                <li>name: {this.state.data.name}</li>
+                <li>address: {this.state.data.address}</li>
+                <li>job: {this.state.data.job}</li>
+                <button onClick={this.change}>修改</button>
+            </ul>
+            </div>
+        );
   	}
 });
 

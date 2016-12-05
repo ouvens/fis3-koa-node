@@ -9,7 +9,7 @@ const minifyConfig = {
 	minifyURLs: true,
 	minifyCSS: true,
 	removeAttributeQuotes: false,
-	removeComments: true,
+	removeComments: false,
 	sortClassName: true,
 	removeTagWhitespace: true,
 	collapseInlineTagWhitespace: true,
@@ -38,9 +38,7 @@ const render = function *(ctx, path, data) {
 			html: 'swig'
 		}
 	})(path, data);
-	console.log(html);
-	return html;
-	// return htmlMinify(html, minifyConfig);
+	return htmlMinify(html, minifyConfig);
 }
 
 module.exports = render;
