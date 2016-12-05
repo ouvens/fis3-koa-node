@@ -75,7 +75,6 @@ var ReactContent = React.createClass({
 
 ReactContent['init'] =  function(store) {
     ReactDOM.render(
-        // <ReactContent url="/api/comments" /> // 从服务端获取数据
         <ReactContent store={ store } getUrl = "http://127.0.0.1:8086/org_rank.html" /> ,
         document.getElementById('testHello')
     );

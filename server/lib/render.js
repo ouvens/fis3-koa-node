@@ -12,7 +12,7 @@ const minifyConfig = {
 	removeComments: false,
 	sortClassName: true,
 	removeTagWhitespace: true,
-	collapseInlineTagWhitespace: true,
+	collapseInlineTagWhitespace: false,
 	collapseWhitespace: true, //
 	preserveLineBreaks: false, //压缩成一行，需要collapseWhitespace=true时生效
 };
