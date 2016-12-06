@@ -3,6 +3,17 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+/**
+ * reactComponent ES6写法
+ * class exampleComponent extends React.Component {
+ *      // 类似getInitialState
+        constructor(props) {
+            super(props);
+            this.state = {example: 'example'};
+        }
+    }
+ */
+
 var ReactContent = React.createClass({
     /**
      * props用于组件接受外部参数, 需要设置给state
