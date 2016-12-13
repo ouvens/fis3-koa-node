@@ -13,7 +13,6 @@ const config = require('./common/config');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const ReactDOMServer = require('react-dom/server');
-const htmlMinify = require('html-minifier').minify;
 
 /**
  * react前后端同构页面
@@ -48,7 +47,7 @@ const reactController = function*(req, res) {
 
     let reactContent = React.createFactory(require('../dev/component/react/react-content/main.jsx'));
 
-    ctx.body = yield render(ctx, 'pages/react', {
+    ctx.body = yield render(ctx, 'pages/topic-index', {
         reactHello: ReactDOMServer.renderToString(reactHello(helloProps)), // renderToString会避免前端重渲染
         reactContent: ReactDOMServer.renderToString(reactContent(contentProps)) // renderToStaticMarkup不会避免前端重渲染
     });
