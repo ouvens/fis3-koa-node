@@ -25,6 +25,7 @@
     "jssha": "^2.1.0",
     "koa": "^1.2.0",
     "koa-body": "^1.4.0",
+    "koa-cors": "0.0.16",
     "koa-logger": "~1.2.0",
     "koa-request": "^1.0.0",
     "koa-router": "^5.4.0",

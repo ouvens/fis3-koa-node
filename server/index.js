@@ -9,6 +9,7 @@ const stylus = require('koa-stylus');
 
 const session = require('koa-session-redis3');
 const koaBody = require('koa-body');
+const cors = require('koa-cors');
 const router = require('./routes');
 
 // Create koa app
@@ -16,6 +17,7 @@ const app = koa();
 
 // middleware
 app.use(logger());
+app.use(cors());
 
 //设置静态目录内容
 app.use(serve('./pages')).use(serve('./dev')).use(serve('./mock'));
