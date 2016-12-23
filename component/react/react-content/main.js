@@ -73,7 +73,7 @@ var ReactContent = React.createClass({
 
         // 修改hello组件的store
         var hello = this.props.store.getState()['hello'];
-        hello.name = 'ouven';
+        hello.name = 'ouvenzhang';
 
         this.props.store.dispatch({
             type: 'hello',

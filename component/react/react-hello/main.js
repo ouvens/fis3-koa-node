@@ -61,7 +61,7 @@ var ReactContent = React.createClass({
             type: 'hello',
             data: hello
         });
-        this.setState({ data: this.props.store.getState()['hello'] });
+        // this.setState({ data: this.props.store.getState()['hello'] }); //不需要手动设置state
     },
 
     render: function() {

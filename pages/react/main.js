@@ -13,10 +13,9 @@ const store = Redux.createStore(reducer);
 function reducer(state={}, action) {
 
     if(action.type){
-
-    state[action.type] = action.data;
+        state[action.type] = action.data;
     }
-    return state
+    return state;
 };
 
 var exports = {
