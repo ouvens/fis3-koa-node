@@ -54,13 +54,14 @@ const getWxJsConfig = function*(ctx) {
 	}
 
 	// 计算签名方法
-	function _calcSignature(ticket, noncestr, ts, url) {
-		var str = 'jsapi_ticket=' + ticket + '&noncestr=' + noncestr + '&timestamp=' + ts + '&url=' + url;
-		let shaObj = new jsSHA('SHA-1', 'TEXT');
-		shaObj.update(str);
+    function _calcSignature(ticket, noncestr, ts, url) {
+    	
+        var str = 'jsapi_ticket=' + ticket + '&noncestr=' + noncestr + '&timestamp=' + ts + '&url=' + url;
+        let shaObj = new jsSHA('SHA-1', 'TEXT');
+        shaObj.update(str);
 
-		return shaObj.getHash('HEX');
-	}
+        return shaObj.getHash('HEX');
+    }
 	return wxJsConfig;
 }
 

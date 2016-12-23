@@ -41,6 +41,8 @@ util.html.toRaw = _toRaw;
 
 util.string.json2str = _json2str;
 util.string.str2json = _str2json;
+util.string.toCamelCase = _toCamelCase;
+
 
 function _format(format, timestamp) {
 
@@ -123,6 +125,19 @@ function _str2json(string) {
 		return {}
 	}
 }
+
+/**
+ * 将中划线命名转为驼峰形式命名
+ * @param  {[type]} string [description]
+ * @return {[type]}        [description]
+ */
+function _toCamelCase(string) {
+	let reg = /-(\w)/g; //通过正则找到-b  -c。默认的是匹配一次，所以要用g来全局匹配。\w指的字符。找一个-找一个字符。replace替换就是B替换-b   C替换-c。 $0代表正则，$1代表指向
+	return string.replace(reg, function($0, $1) {
+		return $1.toUpperCase();
+	});
+}
+
 
 function _extend(oldObject, object) {
 	for (let item in object) {
