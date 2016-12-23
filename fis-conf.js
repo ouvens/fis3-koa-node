@@ -180,6 +180,11 @@ fis.media('deploy')
 			to: serverDist
 		})
 	})
+	.match('/{pkg,libs,component,asyncComponent}/**.jsx', {
+		deploy: fis.plugin('local-deliver', {
+			to: serverDist
+		})
+	})
 	.match('/pkg/pages/*/**.{css,scss,sass}', {
 		useHash: true,
 		useSprite: true,

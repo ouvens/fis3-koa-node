@@ -7,7 +7,6 @@ var reactContent = React.createClass({
      * @return {[type]} [description]
      */
     getInitialState: function() {
-    	console.log(this.props.data);
     	var data = this.props.data;
         return { data: data };
     },

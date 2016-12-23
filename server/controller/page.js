@@ -9,6 +9,7 @@ const util = require('../lib/util');
 const md5 = require('../lib/md5');
 const coRequest = require('../lib/coRequest');
 const config = require('./common/config');
+const reactComponent = require('../lib/reactComponent');
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -43,13 +44,13 @@ const reactController = function*(req, res) {
 	    }
     }
 
-    let reactHello = React.createFactory(require('../dev/component/react/react-hello/main.jsx'));
-
-    let reactContent = React.createFactory(require('../dev/component/react/react-content/main.jsx'));
+    // renderPath(ctx, componentPath, componentProps)
+    let reactHello = reactComponent.renderPath(ctx, 'react/react-hello/main.jsx', helloProps);
+    let reactContent = reactComponent.renderPath(ctx, 'react/react-content/main.jsx', contentProps);
 
     ctx.body = yield render(ctx, 'pages/react', {
-        reactHello: ReactDOMServer.renderToString(reactHello(helloProps)), // renderToString会避免前端重渲染
-        reactContent: ReactDOMServer.renderToString(reactContent(contentProps)) // renderToStaticMarkup不会避免前端重渲染
+        reactHello,
+        reactContent
     });
 };
 
