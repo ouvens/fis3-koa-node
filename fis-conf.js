@@ -226,13 +226,13 @@ fis.media('dev')
 			to: devDist
 		})
 	})
-	.match('/{pkg,libs,component,asyncComponent}/**.js', {
+	.match('/{pkg,libs}/**.js', {
 		// parser: fis.plugin('babel'),
 		deploy: fis.plugin('local-deliver', {
 			to: devDist
 		})
 	})
-	.match('/pkg/pages/*/**.{css,scss,sass}', {
+	.match('/pkg/pages/*/*.{css,scss,sass}', {
 		optimizer: fis.plugin('clean-css'),
 		deploy: fis.plugin('local-deliver', {
 			to: devDist
@@ -243,7 +243,7 @@ fis.media('dev')
 			to: devDist
 		})
 	})
-	.match('**.{ttf, eot, tpl, png}', {
+	.match('**.{ttf, eot, png}', {
 		deploy: fis.plugin('local-deliver', {
 			to: devDist
 		})
@@ -264,14 +264,14 @@ fis.media('dist')
 			to: dist
 		})
 	})
-	.match('/{pkg,libs,component,asyncComponent}/**.js', {
+	.match('/{pkg,libs}/**.js', {
 		parser: fis.plugin('babel'),
 		optimizer: fis.plugin('uglify-js'),
 		deploy: fis.plugin('local-deliver', {
 			to: dist
 		})
 	})
-	.match('/pkg/pages/*/**.{css,scss,sass}', {
+	.match('/pkg/pages/*/*.{css,scss,sass}', {
 		useHash: true,
 		useSprite: true,
 		optimizer: fis.plugin('clean-css'),
@@ -314,13 +314,13 @@ fis.media('app')
 			to: devDist
 		})
 	})
-	.match('/{pkg,libs,component,asyncComponent}/**.js', {
+	.match('/{pkg,libs}/**.js', {
 		url: '/android_asset/www$0',
 		deploy: fis.plugin('local-deliver', {
 			to: devDist
 		})
 	})
-	.match('/pkg/pages/*/**.{css,scss,sass}', {
+	.match('/pkg/pages/*/*.{css,scss,sass}', {
 		// release: '/static/$0',
 		url: '/android_asset/www$0',
 		optimizer: fis.plugin('clean-css'),
@@ -334,7 +334,7 @@ fis.media('app')
 			to: devDist
 		})
 	})
-	.match('**.{ttf, eot, tpl, png}', {
+	.match('**.{ttf, eot, png}', {
 		url: '/android_asset/www$0',
 		deploy: fis.plugin('local-deliver', {
 			to: devDist
@@ -357,7 +357,7 @@ fis.media('publish')
 			to: appDist
 		})
 	})
-	.match('/{pkg,libs,component,asyncComponent}/**.js', {
+	.match('/{pkg,libs}/**.js', {
 		// parser: fis.plugin('babel'),
 		url: '/android_asset/www$0',
 		optimizer: fis.plugin('uglify-js'),
@@ -365,7 +365,7 @@ fis.media('publish')
 			to: appDist
 		})
 	})
-	.match('/pkg/pages/*/**.{css,scss,sass}', {
+	.match('/pkg/pages/*/*.{css,scss,sass}', {
 		url: '/android_asset/www$0',
 		useHash: true,
 		useSprite: true,
