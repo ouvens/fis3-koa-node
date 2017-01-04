@@ -49,7 +49,7 @@ var ReactContent = React.createClass({
         }
 
         let unsubscribe = store.subscribe(handleChange);
-        // unsubscribe();
+        // unsubscribe(); 取消订阅
     },
 
     change: function() {
