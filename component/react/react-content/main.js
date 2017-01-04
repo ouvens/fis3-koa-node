@@ -33,6 +33,7 @@ var ReactContent = React.createClass({
                 job: 'content-update'
             }
         });
+
         this.setState({ data: this.props.store.getState()['content'] });
 
         this._triggerHello();
@@ -79,7 +80,7 @@ var ReactContent = React.createClass({
             type: 'hello',
             data: hello
         });
-    },
+    }
 });
 
 module.exports = {
@@ -88,7 +89,6 @@ module.exports = {
         // 自定义的React类必须使用首字母大写方式命名
         ReactDOM.render(
             <ReactContent store={store}/>,
-            // <ReactContent url="/api/comments" /> // 从服务端获取数据
             document.getElementById('test')
         );
     }

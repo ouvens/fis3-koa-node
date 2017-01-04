@@ -15,6 +15,7 @@ var HelloMessage = React.createClass({
     },
 
     change: function () {
+        // 后端的按钮不会渲染到HTML中
     	// body...
     },
 

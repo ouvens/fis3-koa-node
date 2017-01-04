@@ -44,13 +44,16 @@ const reactController = function*(req, res) {
 	    }
     }
 
-    // renderPath(ctx, componentPath, componentProps)
     let reactHello = reactComponent.renderPath(ctx, 'react/react-hello/main.jsx', helloProps);
     let reactContent = reactComponent.renderPath(ctx, 'react/react-content/main.jsx', contentProps);
 
     ctx.body = yield render(ctx, 'pages/react', {
         reactHello,
-        reactContent
+        reactContent,
+        storeData: {
+            helloProps,
+            contentProps
+        }
     });
 };
 

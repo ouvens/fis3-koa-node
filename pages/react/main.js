@@ -5,10 +5,10 @@
 
 var Redux = require('redux');
 
+const store = Redux.createStore(reducer);
+
 var reactContent = require('react-content');
 var reactHello = require('react-hello');
-
-const store = Redux.createStore(reducer);
 
 function reducer(state={}, action) {
 
@@ -28,26 +28,9 @@ var exports = {
 
     _createStore: function(){
 
-        store.dispatch({
-            type: 'content',
-            data: {
-                name: 'content-name-init',
-                address: 'content-address-init',
-                age: '26',
-                job: 'content-job-init'
-            }
-        });
-
-        store.dispatch({
-            type: 'hello',
-            data: { 
-                name: 'hello-name-init',
-                address: 'hello-address-init',
-                age: '26',
-                job: 'hello-job-init'
-            }
-        });
-
+        for(var key in storeData){
+            store.dispatch(storeData[key]);
+        }
     },
 
     _ajaxData: function() {

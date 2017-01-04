@@ -10,6 +10,7 @@ var reactContent = React.createClass({
     	var data = this.props.data;
         return { data: data };
     },
+    
   	render: function() {
         return (
             <div>
