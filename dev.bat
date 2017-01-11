@@ -1,1 +1,0 @@
-fis3 server start --root ./dev & fis3 release dev -wL & pause

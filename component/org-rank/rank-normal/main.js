@@ -18,7 +18,6 @@ component.extend({
 	_bindEvent: function() {
 		var self = this;
 		var curCount = 0;
-
 		scrollLoad(300, function(count) {
 			if (count > curCount) {
 				curCount = count;
