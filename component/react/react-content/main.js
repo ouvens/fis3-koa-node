@@ -69,7 +69,7 @@ var ReactContent = React.createClass({
         });
     },
 
-    // 触发其它相关组件变化
+    // 触发其它不想关组件变化
     _triggerHello: function(){
 
         // 修改hello组件的store

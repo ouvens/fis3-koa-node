@@ -5,7 +5,7 @@
 
 var Redux = require('redux');
 
-const store = Redux.createStore(reducer);
+var store = Redux.createStore(reducer);
 
 var reactContent = require('react-content');
 var reactHello = require('react-hello');
