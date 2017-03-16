@@ -34,9 +34,10 @@ var exports = {
     },
 
     _ajaxData: function() {
-
+        // 如果要做前端请求的渲染，则在ajax请求完成后进行初始化组件
     },
 
+    // 重新渲染
     _initComponent: function() {
         reactContent.init(store);
         reactHello.init(store);
