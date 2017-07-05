@@ -1,12 +1,16 @@
 {
-  "name": "project",
-  "version": "0.0.1",
-  "dependencies": {
-    "fis-parser-imweb-tplv2": "0.0.3",
-    "fis-parser-react": "^0.13.3",
-    "fis3-hook-relative": "^1.0.9",
-    "fis3-parser-node-sass": "^0.1.9",
-    "fis3-parser-swig": "0.0.7",
-    "html-minifier": "^3.2.3"
-  }
+    "name": "project",
+    "version": "0.0.1",
+    "dependencies": {
+        "fis-parser-imweb-tplv2": "^0.0.3",
+        "fis-parser-node-sass": "^1.0.1",
+        "fis-parser-react": "^0.13.3",
+        "fis-prepackager-csswrapper": "0.0.1",
+        "fis3-hook-commonjs": "^0.1.26",
+        "fis3-hook-relative": "^1.0.9",
+        "fis3-packager-smart": "^1.0.2",
+        "fis3-parser-babel": "^1.2.4",
+        "fis3-parser-swig": "0.0.7",
+        "html-minifier": "^3.2.3"
+    }
 }
